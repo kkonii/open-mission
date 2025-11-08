@@ -1,6 +1,6 @@
 package racingcar.view;
 
-import camp.nextstep.edu.missionutils.Console;
+import racingcar.util.ConsoleScanner;
 
 public class InputView {
 
@@ -10,12 +10,12 @@ public class InputView {
     public String getNameInputs() {
         System.out.println(ENTER_NAMES_TO_RACE);
 
-        return Console.readLine();
+        return ConsoleScanner.readLine();
     }
 
     public String getCountInput() {
         System.out.println(ENTER_COUNT_TO_TRY);
 
-        return Console.readLine();
+        return ConsoleScanner.readLine();
     }
 }
