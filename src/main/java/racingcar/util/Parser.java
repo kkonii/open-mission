@@ -3,6 +3,8 @@ package racingcar.util;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import racingcar.dto.AttributeDto;
+import racingcar.dto.mapper.DtoMapper;
 import racingcar.exception.CommonError;
 
 public class Parser {
@@ -24,6 +26,15 @@ public class Parser {
         return Arrays.stream(consoleInput.split(GROUP_DELIMITER))
                 .map(String::strip)
                 .collect(Collectors.toList());
+    }
+
+    public static List<AttributeDto> toAttributes(String consoleInput) {
+        List<String> parsedGroup = toGroups(consoleInput);
+
+        return parsedGroup.stream()
+                .map(group -> separateAttributes(group))
+                .map(attributes -> DtoMapper.of(attributes))
+                .toList();
     }
 
     public static List<String> toGroups(String consoleInput) {

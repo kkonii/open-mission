@@ -4,7 +4,9 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import racingcar.dto.AttributeDto;
 import racingcar.exception.CommonError;
 
 public class ParserTest {
@@ -54,5 +56,15 @@ public class ParserTest {
         String consoleInput = "BIKE-홍삼";
         //then
         org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> Parser.separateAttributes(consoleInput));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"TAXI-이루카,TAXI,이루카", "BUS-당근,BUS,당근"})
+    void 입력값을_파싱하여_차량과_이름_속성값을_반환한다(String consoleInput, String modelName, String riderName) {
+        //when
+        List<AttributeDto> attributes = Parser.toAttributes(consoleInput);
+        //then
+        attributes.forEach(attribute ->
+                Assertions.assertThat(attribute).isEqualTo(new AttributeDto(modelName, riderName)));
     }
 }
