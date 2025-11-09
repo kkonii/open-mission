@@ -3,6 +3,8 @@ package racingcar.util;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.exception.CommonError;
 
 public class ParserTest {
@@ -35,5 +37,22 @@ public class ParserTest {
         //then
         Assertions.assertThatThrownBy(() -> Parser.separateAttributes(consoleInput))
                 .hasMessage(CommonError.ATTRIBUTE_FORMAT_IS_NOT_VALID.message());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"BIKE", "BIKE-이름-홍삼", "-BUS-버스",})
+    void 구분자로_연결된_요소가_두_개가_아니면_예외를_발생한다(String consoleInput) {
+        //then
+        Assertions.assertThatThrownBy(() -> Parser.separateAttributes(consoleInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CommonError.ATTRIBUTE_FORMAT_IS_NOT_VALID.message());
+    }
+
+    @Test
+    void 구분자로_연결된_요소가_두_개면_검증을_통과한다() {
+        //when
+        String consoleInput = "BIKE-홍삼";
+        //then
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> Parser.separateAttributes(consoleInput));
     }
 }
