@@ -3,6 +3,7 @@ package racingcar.controller;
 import java.util.List;
 import racingcar.domain.Cars;
 import racingcar.domain.RaceProcessor;
+import racingcar.dto.AttributeDto;
 import racingcar.dto.CarDto;
 import racingcar.util.InputValidator;
 import racingcar.util.Parser;
@@ -33,9 +34,9 @@ public class Race {
         String nameInput = inputView.getNameInputs();
 
         InputValidator.blankValue(nameInput);
-        List<String> names = Parser.toNames(nameInput);
+        List<AttributeDto> attributes = Parser.toAttributes(nameInput);
 
-        return raceProcessor.registerCarsFrom(names);
+        return raceProcessor.registerCarsFrom(attributes);
     }
 
     private int inputTryCount() {
