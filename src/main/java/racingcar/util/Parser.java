@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
-    private static final String DELIMITER = ",";
+    private static final String GROUP_DELIMITER = ",";
 
     public static int toInteger(String value) {
         InputValidator.numericType(value);
@@ -18,8 +18,14 @@ public class Parser {
     public static List<String> toNames(String consoleInput) {
         InputValidator.nameFormat(consoleInput);
 
-        return Arrays.stream(consoleInput.split(DELIMITER))
+        return Arrays.stream(consoleInput.split(GROUP_DELIMITER))
                 .map(String::strip)
                 .collect(Collectors.toList());
+    }
+
+    public static List<String> toGroups(String consoleInput) {
+        // [ 그룹, 그룹, 그룹 ]
+        return Arrays.stream(consoleInput.strip()
+                .split(GROUP_DELIMITER)).toList();
     }
 }
