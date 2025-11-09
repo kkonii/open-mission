@@ -31,6 +31,7 @@ public class InputValidator {
         }
     }
 
+    @Deprecated
     public static void nameFormat(String consoleInput) {
         Matcher matcher = NAME_FORMAT_PATTERN.matcher(consoleInput);
 

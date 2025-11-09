@@ -20,14 +20,6 @@ public class Parser {
         return Integer.parseInt(value);
     }
 
-    public static List<String> toNames(String consoleInput) {
-        InputValidator.nameFormat(consoleInput);
-
-        return Arrays.stream(consoleInput.split(GROUP_DELIMITER))
-                .map(String::strip)
-                .collect(Collectors.toList());
-    }
-
     public static List<AttributeDto> toAttributes(String consoleInput) {
         List<String> parsedGroup = toGroups(consoleInput);
 
@@ -56,5 +48,14 @@ public class Parser {
         if (attributes.size() != COUNT_OF_ATTRIBUTE) {
             throw new IllegalArgumentException(CommonError.ATTRIBUTE_FORMAT_IS_NOT_VALID.message());
         }
+    }
+
+    @Deprecated
+    public static List<String> toNames(String consoleInput) {
+        InputValidator.nameFormat(consoleInput);
+
+        return Arrays.stream(consoleInput.split(GROUP_DELIMITER))
+                .map(String::strip)
+                .collect(Collectors.toList());
     }
 }
