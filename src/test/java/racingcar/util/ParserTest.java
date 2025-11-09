@@ -3,6 +3,7 @@ package racingcar.util;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import racingcar.exception.CommonError;
 
 public class ParserTest {
 
@@ -25,5 +26,14 @@ public class ParserTest {
         //then
         Assertions.assertThat(parsedAttributes)
                 .containsExactlyElementsOf(List.of("CAR", "꼬북"));
+    }
+
+    @Test
+    void 차량과_이름_속성값이_모두_입력되지_않으면_예외를_반환한다() {
+        //when
+        String consoleInput = "BUS-";
+        //then
+        Assertions.assertThatThrownBy(() -> Parser.separateAttributes(consoleInput))
+                .hasMessage(CommonError.ATTRIBUTE_FORMAT_IS_NOT_VALID.message());
     }
 }
