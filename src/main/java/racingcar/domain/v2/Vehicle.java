@@ -33,7 +33,7 @@ public class Vehicle {
     private static VehicleModel validatePresentOf(String modelName) {
         Optional<VehicleModel> model = VehicleModel.findBy(modelName);
         if (model.isEmpty()) {
-            throw new IllegalArgumentException(RaceError.VEHICLE_MODEL_NOT_EXIST.message());
+            throw new IllegalArgumentException(RaceError.MODEL_NOT_EXIST.message());
         }
 
         return model.get();

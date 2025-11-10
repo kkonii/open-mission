@@ -27,7 +27,7 @@ public class Vehicles {
 
         for (Vehicle vehicle : vehicles) {
             if (!uniqueModels.add(vehicle.getModel())) {
-                throw new IllegalArgumentException(RaceError.VEHICLE_MODELS_ARE_NOT_UNIQUE.message());
+                throw new IllegalArgumentException(RaceError.MODELS_ARE_NOT_UNIQUE.message());
             }
         }
     }
