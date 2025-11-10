@@ -1,5 +1,6 @@
 package racingcar.domain.v2;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import racingcar.domain.strategy.VehicleModel;
@@ -12,21 +13,30 @@ public class Vehicle {
     private static final int MOVABLE_POINT = 4;
 
     private final VehicleModel model;
-    private final String name;
+    private final String riderName;
     private int distance;
 
-    private Vehicle(VehicleModel model, String name) {
+    private Vehicle(VehicleModel model, String riderName) {
         this.model = model;
-        validateBlank(name);
-        validateLength(name);
-        validatePattern(name);
-        this.name = name;
+        validateBlank(riderName);
+        validateLength(riderName);
+        validatePattern(riderName);
+        this.riderName = riderName;
     }
 
     public static Vehicle createOf(String modelName, String riderName) {
-        VehicleModel model = VehicleModel.findBy(modelName);
+        VehicleModel model = validatePresentOf(modelName);
 
         return new Vehicle(model, riderName);
+    }
+
+    private static VehicleModel validatePresentOf(String modelName) {
+        Optional<VehicleModel> model = VehicleModel.findBy(modelName);
+        if (model.isEmpty()) {
+            throw new IllegalArgumentException(RaceError.VEHICLE_MODEL_NOT_EXIST.message());
+        }
+
+        return model.get();
     }
 
     private void validateLength(String name) {
