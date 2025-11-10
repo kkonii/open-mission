@@ -1,9 +1,8 @@
-package racingcar.controller;
+package racingcar.controller.v1;
 
 import java.util.List;
-import racingcar.domain.Cars;
-import racingcar.domain.RaceProcessor;
-import racingcar.dto.AttributeDto;
+import racingcar.domain.v1.Cars;
+import racingcar.domain.v1.RaceProcessor;
 import racingcar.dto.CarDto;
 import racingcar.util.InputValidator;
 import racingcar.util.Parser;
@@ -34,9 +33,9 @@ public class Race {
         String nameInput = inputView.getNameInputs();
 
         InputValidator.blankValue(nameInput);
-        List<AttributeDto> attributes = Parser.toAttributes(nameInput);
+        List<String> names = Parser.toNames(nameInput);
 
-        return raceProcessor.registerCarsFrom(attributes);
+        return raceProcessor.registerCarsFrom(names);
     }
 
     private int inputTryCount() {

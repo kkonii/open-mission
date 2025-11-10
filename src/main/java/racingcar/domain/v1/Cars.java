@@ -1,4 +1,4 @@
-package racingcar.domain;
+package racingcar.domain.v1;
 
 import java.util.List;
 import java.util.function.IntSupplier;

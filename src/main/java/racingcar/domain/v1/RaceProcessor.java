@@ -1,8 +1,7 @@
-package racingcar.domain;
+package racingcar.domain.v1;
 
 import java.util.List;
 import racingcar.domain.strategy.NumberPickerBase;
-import racingcar.dto.AttributeDto;
 import racingcar.dto.CarDto;
 import racingcar.dto.mapper.DtoMapper;
 import racingcar.exception.RaceError;
@@ -17,9 +16,9 @@ public class RaceProcessor {
         this.randomNumberPicker = randomNumberPicker;
     }
 
-    public Cars registerCarsFrom(List<AttributeDto> attributes) {
-        return Cars.ofUnique(attributes.stream()
-                .map(attribute -> Car.createOf(attribute.modelName(), attribute.riderName()))
+    public Cars registerCarsFrom(List<String> names) {
+        return Cars.ofUnique(names.stream()
+                .map(Car::withName)
                 .toList());
     }
 

@@ -1,8 +1,8 @@
 package racingcar;
 
-import racingcar.controller.Race;
-import racingcar.domain.RaceProcessor;
+import racingcar.controller.v1.Race;
 import racingcar.domain.RandomNumberPicker;
+import racingcar.domain.v1.RaceProcessor;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 

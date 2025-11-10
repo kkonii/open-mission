@@ -5,8 +5,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.domain.strategy.VehicleModel;
+import racingcar.domain.v2.Vehicle;
 
-public class CarTest {
+public class VehicleTest {
 
     @ParameterizedTest
     @EnumSource(VehicleModel.class)
@@ -14,7 +15,7 @@ public class CarTest {
         //given
         String riderName = "임시이름";
         //then
-        Assertions.assertDoesNotThrow(() -> Car.createOf(model.name(), riderName));
+        Assertions.assertDoesNotThrow(() -> Vehicle.createOf(model.name(), riderName));
     }
 
     @ParameterizedTest
@@ -23,6 +24,6 @@ public class CarTest {
         //given
         VehicleModel model = VehicleModel.BUS;
         //then
-        Assertions.assertDoesNotThrow(() -> Car.createOf(model.name(), riderName));
+        Assertions.assertDoesNotThrow(() -> Vehicle.createOf(model.name(), riderName));
     }
 }

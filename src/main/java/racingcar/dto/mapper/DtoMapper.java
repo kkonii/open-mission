@@ -1,7 +1,7 @@
 package racingcar.dto.mapper;
 
 import java.util.List;
-import racingcar.domain.Car;
+import racingcar.domain.v1.Car;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.CarDto;
 

@@ -1,8 +1,7 @@
-package racingcar.domain;
+package racingcar.domain.v1;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import racingcar.domain.strategy.VehicleModel;
 import racingcar.exception.RaceError;
 
 public class Car {
@@ -11,22 +10,18 @@ public class Car {
     private static final int MAXIMUM_NAME_LENGTH = 5;
     private static final int MOVABLE_POINT = 4;
 
-    private final VehicleModel model;
     private final String name;
     private int distance;
 
-    private Car(VehicleModel model, String name) {
-        this.model = model;
+    private Car(String name) {
         validateBlank(name);
         validateLength(name);
         validatePattern(name);
         this.name = name;
     }
 
-    public static Car createOf(String modelName, String riderName) {
-        VehicleModel model = VehicleModel.findBy(modelName);
-
-        return new Car(model, riderName);
+    public static Car withName(String name) {
+        return new Car(name);
     }
 
     private void validateLength(String name) {
