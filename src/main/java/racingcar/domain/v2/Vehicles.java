@@ -1,6 +1,10 @@
 package racingcar.domain.v2;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import racingcar.domain.strategy.VehicleModel;
+import racingcar.exception.RaceError;
 
 public class Vehicles {
 
@@ -10,7 +14,20 @@ public class Vehicles {
         this.vehicles = vehicles;
     }
 
-    public static Vehicles ofUnique(Set<Vehicle> vehicles) {
-        return new Vehicles(vehicles);
+    public static Vehicles ofUnique(List<Vehicle> vehicles) {
+        validateUniqueModel(vehicles);
+        Set<Vehicle> uniqueVehicles = new HashSet<>(vehicles);
+
+        return new Vehicles(uniqueVehicles);
+    }
+
+    private static void validateUniqueModel(List<Vehicle> vehicles) {
+        Set<VehicleModel> uniqueModels = new HashSet<>();
+
+        for (Vehicle vehicle : vehicles) {
+            if (!uniqueModels.add(vehicle.getModel())) {
+                throw new IllegalArgumentException(RaceError.VEHICLE_MODELS_ARE_NOT_UNIQUE.message());
+            }
+        }
     }
 }

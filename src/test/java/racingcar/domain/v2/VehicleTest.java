@@ -1,11 +1,10 @@
-package racingcar.domain;
+package racingcar.domain.v2;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.domain.strategy.VehicleModel;
-import racingcar.domain.v2.Vehicle;
 
 public class VehicleTest {
 

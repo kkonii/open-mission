@@ -58,4 +58,8 @@ public class Vehicle {
             throw new IllegalArgumentException(RaceError.NAME_IS_NOT_VALID_PATTERN.message());
         }
     }
+
+    public VehicleModel getModel() {
+        return model;
+    }
 }
