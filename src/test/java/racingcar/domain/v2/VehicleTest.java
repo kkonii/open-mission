@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.domain.strategy.VehicleModel;
+import racingcar.exception.RaceError;
 
 public class VehicleTest {
 
@@ -24,5 +25,26 @@ public class VehicleTest {
         VehicleModel model = VehicleModel.BUS;
         //then
         Assertions.assertDoesNotThrow(() -> Vehicle.createOf(model.name(), riderName));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {" ", "", "\t", "\n"})
+    void 공백값인_이름에_대해_예외를_발생한다(String riderName) {
+        //given
+        VehicleModel model = VehicleModel.BUS;
+        //then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Vehicle.createOf(model.name(), riderName));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {",", "+", "=", "&", "/", "🤔"})
+    void 숫자_한글_영어가_아닌_이름에_대해_예외를_발생한다(String invalidName) {
+        //givne
+        //given
+        VehicleModel model = VehicleModel.TAXI;
+
+        Assertions.assertThrowsExactly(IllegalArgumentException.class,
+                () -> Vehicle.createOf(model.name(), invalidName),
+                RaceError.NAME_IS_NOT_VALID_PATTERN.message());
     }
 }

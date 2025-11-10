@@ -13,21 +13,21 @@ public class Vehicle {
     private static final int MOVABLE_POINT = 4;
 
     private final VehicleModel model;
-    private final String riderName;
+    private final String name;
     private int distance;
 
-    private Vehicle(VehicleModel model, String riderName) {
+    private Vehicle(VehicleModel model, String name) {
         this.model = model;
-        validateBlank(riderName);
-        validateLength(riderName);
-        validatePattern(riderName);
-        this.riderName = riderName;
+        validateBlank(name);
+        validateLength(name);
+        validatePattern(name);
+        this.name = name;
     }
 
-    public static Vehicle createOf(String modelName, String riderName) {
+    public static Vehicle createOf(String modelName, String name) {
         VehicleModel model = validatePresentOf(modelName);
 
-        return new Vehicle(model, riderName);
+        return new Vehicle(model, name);
     }
 
     private static VehicleModel validatePresentOf(String modelName) {
@@ -61,5 +61,9 @@ public class Vehicle {
 
     public VehicleModel getModel() {
         return model;
+    }
+
+    public String getName() {
+        return name;
     }
 }
