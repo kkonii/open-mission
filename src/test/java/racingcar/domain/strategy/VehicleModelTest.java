@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class VehicleModelTest {
@@ -25,5 +26,11 @@ public class VehicleModelTest {
         VehicleModel vehicleModel = VehicleModel.findBy(modelName).get();
         //then
         Assertions.assertEquals(vehicleModel.name(), modelName);
+    }
+
+    @ParameterizedTest
+    @MethodSource("racingcar.fixture.Provider#movablePointArguments")
+    void 입력받은_숫자가_전진_가능한지_여부를_반환한다(VehicleModel model, int number) {
+        Assertions.assertTrue(model.canMove(number));
     }
 }
