@@ -3,6 +3,7 @@ package racingcar.domain.v2;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.IntSupplier;
 import racingcar.domain.strategy.VehicleModel;
 import racingcar.exception.RaceError;
 
@@ -40,5 +41,16 @@ public class Vehicles {
                 throw new IllegalArgumentException(RaceError.NAMES_ARE_NOT_UNIQUE.message());
             }
         }
+    }
+
+    public void move(IntSupplier picked) {
+        vehicles.forEach(vehicle -> {
+            int number = picked.getAsInt();
+            vehicle.move(number);
+        });
+    }
+
+    public Set<Vehicle> getVehicles() {
+        return Set.copyOf(vehicles);
     }
 }
