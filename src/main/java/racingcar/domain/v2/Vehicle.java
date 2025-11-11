@@ -10,7 +10,6 @@ public class Vehicle {
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[ㄱ-ㅎ가-힣a-zA-Z0-9 ]+$");
     private static final int MAXIMUM_NAME_LENGTH = 5;
-    private static final int MOVABLE_POINT = 4;
 
     private final VehicleModel model;
     private final String name;
@@ -60,7 +59,9 @@ public class Vehicle {
     }
 
     public void move(int number) {
-        distance += model.distanceBy(number);
+        if (model.canMove(number)) {
+            distance += model.getForward();
+        }
     }
 
     public VehicleModel getModel() {

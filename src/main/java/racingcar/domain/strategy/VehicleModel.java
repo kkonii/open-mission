@@ -13,11 +13,11 @@ public enum VehicleModel {
     BUS((num) -> num % 2 == 0, 1);
 
     private final Predicate<Integer> movablePoint;
-    private final int movingDistance;
+    private final int forward;
 
-    VehicleModel(Predicate<Integer> movablePoint, int movingDistance) {
+    VehicleModel(Predicate<Integer> movablePoint, int forward) {
         this.movablePoint = movablePoint;
-        this.movingDistance = movingDistance;
+        this.forward = forward;
     }
 
     public static Optional<VehicleModel> findBy(String modelName) {
@@ -26,14 +26,11 @@ public enum VehicleModel {
                 .findFirst();
     }
 
-    private boolean canMove(int number) {
+    public boolean canMove(int number) {
         return this.movablePoint.test(number);
     }
 
-    public int distanceBy(int number) {
-        if (canMove(number)) {
-            return movingDistance;
-        }
-        return 0;
+    public int getForward() {
+        return forward;
     }
 }
