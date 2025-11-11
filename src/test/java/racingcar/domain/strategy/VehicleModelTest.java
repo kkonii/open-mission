@@ -30,7 +30,7 @@ public class VehicleModelTest {
 
     @ParameterizedTest
     @MethodSource("racingcar.fixture.Provider#movablePointArguments")
-    void 입력받은_숫자가_전진_가능한지_여부를_반환한다(VehicleModel model, int number) {
-        Assertions.assertTrue(model.canMove(number));
+    void 입력받은_숫자를_판단해_전진할_거리를_반환한다(VehicleModel model, int number, int moveForward) {
+        Assertions.assertEquals(model.distanceBy(number), moveForward);
     }
 }

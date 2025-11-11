@@ -59,11 +59,19 @@ public class Vehicle {
         }
     }
 
+    public void move(int number) {
+        distance += model.distanceBy(number);
+    }
+
     public VehicleModel getModel() {
         return model;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getDistance() {
+        return distance;
     }
 }

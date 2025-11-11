@@ -3,6 +3,7 @@ package racingcar.domain.v2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.domain.strategy.VehicleModel;
 import racingcar.exception.RaceError;
@@ -39,12 +40,23 @@ public class VehicleTest {
     @ParameterizedTest
     @ValueSource(strings = {",", "+", "=", "&", "/", "🤔"})
     void 숫자_한글_영어가_아닌_이름에_대해_예외를_발생한다(String invalidName) {
-        //givne
         //given
         VehicleModel model = VehicleModel.TAXI;
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class,
                 () -> Vehicle.createOf(model.name(), invalidName),
                 RaceError.NAME_IS_NOT_VALID_PATTERN.message());
+    }
+
+    @ParameterizedTest
+    @MethodSource("racingcar.fixture.Provider#movablePointArguments")
+    void 전진_가능한_숫자가_나오면_전진한다(VehicleModel model, int number, int moveForward) {
+        //given
+        String name = "오렌지";
+        //when
+        Vehicle vehicle = Vehicle.createOf(model.name(), name);
+        vehicle.move(number);
+        //then
+        Assertions.assertEquals(vehicle.getDistance(), moveForward);
     }
 }
