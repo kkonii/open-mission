@@ -3,6 +3,7 @@ package racingcar.domain.v2;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import racingcar.domain.strategy.VehicleModel;
 
 public class VehiclesTest {
 
@@ -32,5 +33,19 @@ public class VehiclesTest {
 
         //then
         Assertions.assertThrows(IllegalArgumentException.class, () -> Vehicles.ofUnique(vehicles));
+    }
+
+    @Test
+    void 입력된_순서를_보장하여_객체를_생성한다() {
+        //given
+        Vehicle vehicle1 = Vehicle.createOf(VehicleModel.FERRARI.name(), "페가수스");
+        Vehicle vehicle2 = Vehicle.createOf(VehicleModel.BUS.name(), "버스기사");
+        Vehicle vehicle3 = Vehicle.createOf(VehicleModel.TAXI.name(), "택시기사");
+        Vehicle vehicle4 = Vehicle.createOf(VehicleModel.CAR.name(), "자동차");
+        //when
+        Vehicles vehicles = Vehicles.ofUnique(List.of(vehicle1, vehicle2, vehicle3, vehicle4));
+        //then
+        org.assertj.core.api.Assertions.assertThat(vehicles.getVehicles())
+                .containsExactly(vehicle1, vehicle2, vehicle3, vehicle4);
     }
 }

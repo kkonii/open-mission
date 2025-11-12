@@ -52,6 +52,6 @@ public class Vehicles {
     }
 
     public Set<Vehicle> getVehicles() {
-        return Set.copyOf(vehicles);
+        return vehicles;
     }
 }
