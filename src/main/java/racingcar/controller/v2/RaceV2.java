@@ -7,8 +7,8 @@ import racingcar.dto.AttributeDto;
 import racingcar.dto.RoundResultDto;
 import racingcar.util.InputValidator;
 import racingcar.util.Parser;
-import racingcar.view.InputViewV2;
-import racingcar.view.OutputViewV2;
+import racingcar.view.v2.InputViewV2;
+import racingcar.view.v2.OutputViewV2;
 
 public class RaceV2 {
 

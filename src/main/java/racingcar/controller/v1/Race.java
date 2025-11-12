@@ -6,8 +6,8 @@ import racingcar.domain.v1.RaceProcessor;
 import racingcar.dto.CarDto;
 import racingcar.util.InputValidator;
 import racingcar.util.Parser;
-import racingcar.view.InputView;
-import racingcar.view.OutputView;
+import racingcar.view.v1.InputView;
+import racingcar.view.v1.OutputView;
 
 public class Race {
 

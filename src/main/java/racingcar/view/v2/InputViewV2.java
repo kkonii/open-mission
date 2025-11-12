@@ -1,4 +1,4 @@
-package racingcar.view;
+package racingcar.view.v2;
 
 import racingcar.util.ConsoleScanner;
 
