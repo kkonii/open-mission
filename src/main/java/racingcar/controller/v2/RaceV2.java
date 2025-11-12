@@ -4,6 +4,7 @@ import java.util.List;
 import racingcar.domain.v2.RaceProcessorV2;
 import racingcar.domain.v2.Vehicles;
 import racingcar.dto.AttributeDto;
+import racingcar.dto.RoundResultDto;
 import racingcar.util.InputValidator;
 import racingcar.util.v1.Parser;
 import racingcar.view.InputView;
@@ -24,6 +25,8 @@ public class RaceV2 {
     public void run() {
         Vehicles cars = readyCars();
         int tryCount = inputTryCount();
+
+        proceedRace(tryCount, cars);
     }
 
     public Vehicles readyCars() {
@@ -40,5 +43,11 @@ public class RaceV2 {
         InputValidator.blankValue(countInput);
 
         return Parser.toInteger(countInput);
+    }
+
+    private void proceedRace(int tryCount, Vehicles vehicles) {
+        outputView.printHeader();
+        List<List<RoundResultDto>> allResults = raceProcessor.runAllRound(tryCount, vehicles);
+        allResults.forEach(outputView::printResultOf);
     }
 }
