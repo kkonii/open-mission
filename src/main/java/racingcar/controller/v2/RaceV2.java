@@ -6,17 +6,17 @@ import racingcar.domain.v2.Vehicles;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.RoundResultDto;
 import racingcar.util.InputValidator;
-import racingcar.util.v1.Parser;
-import racingcar.view.InputView;
+import racingcar.util.Parser;
+import racingcar.view.InputViewV2;
 import racingcar.view.OutputViewV2;
 
 public class RaceV2 {
 
     private final RaceProcessorV2 raceProcessor;
-    private final InputView inputView;
+    private final InputViewV2 inputView;
     private final OutputViewV2 outputView;
 
-    public RaceV2(RaceProcessorV2 raceProcessor, InputView inputView, OutputViewV2 outputView) {
+    public RaceV2(RaceProcessorV2 raceProcessor, InputViewV2 inputView, OutputViewV2 outputView) {
         this.raceProcessor = raceProcessor;
         this.inputView = inputView;
         this.outputView = outputView;
