@@ -70,14 +70,14 @@ FERRARI-경연,TAXI-우테코,BUS-포비
 허용 범위 예시
 
 ```java
-return products.stream()
-    .
+  return products.stream()
+      .
 
 filter(this::method1)
-    .
+      .
 
 map(this::method2)
-    .
+      .
 
 toList();
 ```
@@ -86,6 +86,9 @@ toList();
 - [ ] 3항 연산자를 쓰지 않는다
 - [ ] `camp.nextstep.edu.missionutils` 에서 제공한 api 는 직접 구현하여 사용한다
 - [ ] 정규식을 사용하지 않고 검증을 구현해본다
+
+- [ ] service, repository 를 도입해서 구조를 설계한다
+- [ ] 입출력 기능에 대해 테스트 코드를 작한다
 
 ## 환경 요구 사항
 
