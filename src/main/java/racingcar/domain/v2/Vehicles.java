@@ -1,6 +1,7 @@
 package racingcar.domain.v2;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.IntSupplier;
@@ -18,7 +19,7 @@ public class Vehicles {
     public static Vehicles ofUnique(List<Vehicle> vehicles) {
         validateUniqueModel(vehicles);
         validateUniqueName(vehicles);
-        Set<Vehicle> uniqueVehicles = new HashSet<>(vehicles);
+        Set<Vehicle> uniqueVehicles = new LinkedHashSet<>(vehicles);
 
         return new Vehicles(uniqueVehicles);
     }
