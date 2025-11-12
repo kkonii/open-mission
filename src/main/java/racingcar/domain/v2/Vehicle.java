@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import racingcar.domain.strategy.VehicleModel;
 import racingcar.exception.RaceError;
 
-public class Vehicle {
+public class Vehicle implements Comparable<Vehicle> {
 
     private static final Pattern NAME_PATTERN = Pattern.compile("^[ㄱ-ㅎ가-힣a-zA-Z0-9 ]+$");
     private static final int MAXIMUM_NAME_LENGTH = 5;
@@ -74,5 +74,10 @@ public class Vehicle {
 
     public int getDistance() {
         return distance;
+    }
+
+    @Override
+    public int compareTo(Vehicle v) {
+        return Integer.compare(this.distance, v.distance);
     }
 }

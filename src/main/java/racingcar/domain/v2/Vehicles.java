@@ -51,6 +51,17 @@ public class Vehicles {
         });
     }
 
+    public int findMaxDistance() {
+        Set<Vehicle> copyOf = Set.copyOf(vehicles);
+
+        List<Vehicle> sortedByDistance = copyOf.stream()
+                .sorted()
+                .toList();
+
+        return sortedByDistance.getLast()
+                .getDistance();
+    }
+
     public Set<Vehicle> getVehicles() {
         return vehicles;
     }

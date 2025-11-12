@@ -1,6 +1,7 @@
 package racingcar.domain.v2;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,6 +10,14 @@ import racingcar.domain.strategy.VehicleModel;
 import racingcar.exception.RaceError;
 
 public class VehicleTest {
+
+    @Test
+    void 존재하지_않는_차량_기종은_예외를_발생한다() {
+        //when
+        String noExistModel = "SCOOTER";
+        //then
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> Vehicle.createOf(noExistModel, "이름"));
+    }
 
     @ParameterizedTest
     @EnumSource(VehicleModel.class)
