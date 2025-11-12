@@ -5,20 +5,25 @@ import racingcar.domain.v2.RaceProcessorV2;
 import racingcar.domain.v2.Vehicles;
 import racingcar.dto.AttributeDto;
 import racingcar.util.InputValidator;
-import racingcar.util.Parser;
+import racingcar.util.v1.Parser;
 import racingcar.view.InputView;
-import racingcar.view.OutputView;
+import racingcar.view.OutputViewV2;
 
 public class RaceV2 {
 
     private final RaceProcessorV2 raceProcessor;
     private final InputView inputView;
-    private final OutputView outputView;
+    private final OutputViewV2 outputView;
 
-    public RaceV2(RaceProcessorV2 raceProcessor, InputView inputView, OutputView outputView) {
+    public RaceV2(RaceProcessorV2 raceProcessor, InputView inputView, OutputViewV2 outputView) {
         this.raceProcessor = raceProcessor;
         this.inputView = inputView;
         this.outputView = outputView;
+    }
+
+    public void run() {
+        Vehicles cars = readyCars();
+        int tryCount = inputTryCount();
     }
 
     public Vehicles readyCars() {
@@ -30,4 +35,10 @@ public class RaceV2 {
         return raceProcessor.registerCarsFrom(attributes);
     }
 
+    private int inputTryCount() {
+        String countInput = inputView.getCountInput();
+        InputValidator.blankValue(countInput);
+
+        return Parser.toInteger(countInput);
+    }
 }
