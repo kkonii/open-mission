@@ -50,7 +50,7 @@ public class VehiclesTest {
     }
 
     @Test
-    void 가장_멀리_이동한_거리값을_찾아_반환한다() {
+    void 가장_멀리_이동한_자동차들을_반환한다() {
         //given
         Vehicle vehicle1 = Vehicle.createOf(VehicleModel.BUS.name(), "스이카");
         Vehicle vehicle2 = Vehicle.createOf(VehicleModel.TAXI.name(), "이루카");
@@ -64,8 +64,8 @@ public class VehiclesTest {
         vehicle2.move(8);
         //1번 이동 (조건: 3)
         vehicle3.move(3);
-        int maxDistance = vehicles.findMaxDistance();
+        List<Vehicle> winner = vehicles.findWinners();
         //then
-        Assertions.assertEquals(maxDistance, 2);
+        org.assertj.core.api.Assertions.assertThat(winner).containsExactly(vehicle1);
     }
 }

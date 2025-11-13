@@ -68,4 +68,16 @@ public class VehicleTest {
         //then
         Assertions.assertEquals(vehicle.getDistance(), moveForward);
     }
+
+    @Test
+    void 이동한_거리값을_기준으로_동등성을_판단한다() {
+        //given
+        Vehicle vehicle1 = Vehicle.createOf(VehicleModel.BUS.name(), "스이카");
+        Vehicle vehicle2 = Vehicle.createOf(VehicleModel.TAXI.name(), "이루카");
+        //when
+        vehicle1.move(8);
+        vehicle2.move(7);
+        //then
+        Assertions.assertEquals(vehicle1.compareTo(vehicle2), 0);
+    }
 }

@@ -64,6 +64,10 @@ public class Vehicle implements Comparable<Vehicle> {
         }
     }
 
+    public boolean movedFor(int distance) {
+        return this.distance == distance;
+    }
+
     public VehicleModel getModel() {
         return model;
     }

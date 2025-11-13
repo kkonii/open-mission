@@ -5,6 +5,7 @@ import java.util.List;
 import racingcar.domain.RandomNumberPicker;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.RoundResultDto;
+import racingcar.dto.WinnerDto;
 
 public class RaceProcessorV2 {
 
@@ -36,6 +37,13 @@ public class RaceProcessorV2 {
         return vehicles.getVehicles()
                 .stream()
                 .map(vehicle -> new RoundResultDto(vehicle.getName(), vehicle.getDistance()))
+                .toList();
+    }
+
+    public List<WinnerDto> sortWinners(Vehicles vehicles) {
+        return vehicles.findWinners()
+                .stream()
+                .map(winner -> new WinnerDto(winner.getName()))
                 .toList();
     }
 }
