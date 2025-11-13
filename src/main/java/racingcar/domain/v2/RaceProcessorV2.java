@@ -2,16 +2,15 @@ package racingcar.domain.v2;
 
 import java.util.ArrayList;
 import java.util.List;
-import racingcar.domain.RandomNumberPicker;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.RoundResultDto;
 import racingcar.dto.WinnerDto;
 
 public class RaceProcessorV2 {
 
-    private final RandomNumberPicker randomNumberPicker;
+    private final RandomNumberPickerV2 randomNumberPicker;
 
-    public RaceProcessorV2(RandomNumberPicker randomNumberPicker) {
+    public RaceProcessorV2(RandomNumberPickerV2 randomNumberPicker) {
         this.randomNumberPicker = randomNumberPicker;
     }
 
