@@ -11,6 +11,7 @@ import racingcar.app.v2.view.InputView;
 import racingcar.app.v2.view.OutputView;
 import racingcar.common.InputValidator;
 import racingcar.common.Race;
+import racingcar.common.RetryHandler;
 
 public class ExtendRace implements Race {
 
@@ -25,14 +26,14 @@ public class ExtendRace implements Race {
     }
 
     public void run() {
-        Vehicles cars = readyCars();
-        int tryCount = inputTryCount();
+        Vehicles cars = RetryHandler.runUntilSuccess(this::inputVehicles);
+        int tryCount = RetryHandler.runUntilSuccess(this::inputTryCount);
 
         proceedRace(tryCount, cars);
         printWinner(cars);
     }
 
-    private Vehicles readyCars() {
+    private Vehicles inputVehicles() {
         String nameInput = inputView.getNameInputs();
 
         InputValidator.blankValue(nameInput);
