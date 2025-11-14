@@ -8,8 +8,9 @@ import racingcar.app.v1.util.Parser;
 import racingcar.app.v1.view.InputView;
 import racingcar.app.v1.view.OutputView;
 import racingcar.common.InputValidator;
+import racingcar.common.Race;
 
-public class ClassicRace {
+public class ClassicRace implements Race {
 
     private final RaceProcessor raceProcessor;
     private final InputView inputView;

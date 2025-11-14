@@ -10,8 +10,9 @@ import racingcar.app.v2.util.Parser;
 import racingcar.app.v2.view.InputView;
 import racingcar.app.v2.view.OutputView;
 import racingcar.common.InputValidator;
+import racingcar.common.Race;
 
-public class ExtendRace {
+public class ExtendRace implements Race {
 
     private final RaceProcessor raceProcessor;
     private final InputView inputView;
