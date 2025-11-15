@@ -52,7 +52,7 @@ public class VehiclesTest {
     }
 
     @Test
-    void 가장_멀리_이동한_자동차들을_반환한다() {
+    void 달린_거리_순으로_정렬하여_반환한다() {
         //given
         Vehicle vehicle1 = Vehicle.createOf(VehicleModel.BUS.name(), "스이카");
         Vehicle vehicle2 = Vehicle.createOf(VehicleModel.TAXI.name(), "이루카");
@@ -66,8 +66,8 @@ public class VehiclesTest {
         vehicle2.move(8);
         //1번 이동 (조건: 3)
         vehicle3.move(3);
-        List<Vehicle> winner = vehicles.findWinners();
+        List<Vehicle> winner = vehicles.sortByDistance();
         //then
-        org.assertj.core.api.Assertions.assertThat(winner).containsExactly(vehicle1);
+        org.assertj.core.api.Assertions.assertThat(winner).containsExactly(vehicle1, vehicle3, vehicle2);
     }
 }

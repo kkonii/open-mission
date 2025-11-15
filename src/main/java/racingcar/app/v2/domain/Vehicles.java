@@ -1,5 +1,6 @@
 package racingcar.app.v2.domain;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -51,23 +52,10 @@ public class Vehicles {
         });
     }
 
-    public List<Vehicle> findWinners() {
-        int maxDistance = findMaxDistance();
-
+    public List<Vehicle> sortByDistance() {
         return vehicles.stream()
-                .filter(vehicle -> vehicle.movedFor(maxDistance))
+                .sorted(Comparator.reverseOrder())
                 .toList();
-    }
-
-    private int findMaxDistance() {
-        Set<Vehicle> copyOf = Set.copyOf(vehicles);
-
-        List<Vehicle> sortedByDistance = copyOf.stream()
-                .sorted()
-                .toList();
-
-        return sortedByDistance.getLast()
-                .getDistance();
     }
 
     public Set<Vehicle> getVehicles() {
