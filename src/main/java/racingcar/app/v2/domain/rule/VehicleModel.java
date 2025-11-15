@@ -1,6 +1,7 @@
 package racingcar.app.v2.domain.rule;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -28,6 +29,12 @@ public enum VehicleModel {
 
     public boolean canMove(int number) {
         return this.movablePoint.test(number);
+    }
+
+    public static List<String> getNames() {
+        return Arrays.stream(VehicleModel.values())
+                .map(Enum::name)
+                .toList();
     }
 
     public int getForward() {

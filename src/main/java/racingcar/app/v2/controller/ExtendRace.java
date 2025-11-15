@@ -26,6 +26,8 @@ public class ExtendRace implements Race {
     }
 
     public void run() {
+        inputView.guideRacingCars();
+
         Vehicles cars = RetryHandler.runUntilSuccess(this::inputVehicles);
         int tryCount = RetryHandler.runUntilSuccess(this::inputTryCount);
 
