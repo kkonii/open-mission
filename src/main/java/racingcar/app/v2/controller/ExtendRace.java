@@ -5,7 +5,6 @@ import racingcar.app.v2.domain.RaceProcessor;
 import racingcar.app.v2.domain.Vehicles;
 import racingcar.app.v2.dto.AttributeDto;
 import racingcar.app.v2.dto.RoundResultDto;
-import racingcar.app.v2.dto.WinnerDto;
 import racingcar.app.v2.util.Parser;
 import racingcar.app.v2.view.InputView;
 import racingcar.app.v2.view.OutputView;
@@ -58,7 +57,7 @@ public class ExtendRace implements Race {
     }
 
     private void printWinner(Vehicles vehicles) {
-        List<WinnerDto> winners = raceProcessor.sortWinners(vehicles);
-        outputView.printNamesOf(winners);
+        //List<WinnerDto> winners = raceProcessor.sortWinners(vehicles);
+        //outputView.printNamesOf(winners);
     }
 }

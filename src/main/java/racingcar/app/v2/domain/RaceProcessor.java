@@ -1,11 +1,12 @@
 package racingcar.app.v2.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import racingcar.app.v2.domain.rule.RandomNumberPicker;
 import racingcar.app.v2.dto.AttributeDto;
 import racingcar.app.v2.dto.RoundResultDto;
-import racingcar.app.v2.dto.WinnerDto;
 
 public class RaceProcessor {
 
@@ -40,10 +41,21 @@ public class RaceProcessor {
                 .toList();
     }
 
-    public List<WinnerDto> sortWinners(Vehicles vehicles) {
-        return vehicles.findWinners()
-                .stream()
-                .map(winner -> new WinnerDto(winner.getName()))
-                .toList();
+    public Map<Integer, List<Vehicle>> calculateRanksOf(Vehicles vehicles) {
+        List<Vehicle> sortedCars = vehicles.sortByDistance();
+
+        Map<Integer, List<Vehicle>> statistics = new HashMap<>();
+        for (Vehicle car : sortedCars) {
+            int rank = sortedCars.indexOf(car) + 1;
+            List<Vehicle> list = statistics.get(rank);
+
+            if (list == null) {
+                list = new ArrayList<>();
+                statistics.put(rank, list);
+            }
+            list.add(car);
+        }
+
+        return statistics;
     }
 }
