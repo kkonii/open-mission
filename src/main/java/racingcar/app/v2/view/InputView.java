@@ -1,5 +1,6 @@
 package racingcar.app.v2.view;
 
+import java.util.stream.Collectors;
 import racingcar.app.v2.domain.rule.VehicleModel;
 import racingcar.common.ConsoleScanner;
 
@@ -11,7 +12,9 @@ public class InputView {
 
     public void guideRacingCars() {
         System.out.println(CARS_ARE);
-        System.out.println(VehicleModel.getNames());
+        System.out.println(VehicleModel.getNames()
+                .stream()
+                .collect(Collectors.joining(", ", "<", ">")));
         System.out.println();
     }
 
