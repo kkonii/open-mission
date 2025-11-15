@@ -1,5 +1,6 @@
 package racingcar.common;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import racingcar.exception.CommonError;
@@ -9,7 +10,7 @@ public class InputValidator {
     private static final Pattern NUMERIC = Pattern.compile("^[+-]?\\d+$");
 
     public static void blankValue(String value) {
-        if (value.isBlank()) {
+        if (Objects.isNull(value) || value.isBlank()) {
             throw new IllegalArgumentException(CommonError.INPUT_IS_BLANK.message());
         }
     }
