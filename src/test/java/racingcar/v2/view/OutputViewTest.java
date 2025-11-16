@@ -16,6 +16,6 @@ public class OutputViewTest {
         // when
         System.out.println(input);
         // then
-        Assertions.assertEquals(input + "\r\n", outContent.toString());
+        Assertions.assertEquals(input + System.lineSeparator(), outContent.toString());
     }
 }
