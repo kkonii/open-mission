@@ -30,7 +30,7 @@ public class ParserTest {
         List<String> parsedAttributes = Parser.separateAttributes(consoleInput);
         //then
         Assertions.assertThat(parsedAttributes)
-                .containsExactlyElementsOf(List.of("CAR", "꼬북"));
+                .containsExactlyElementsOf(List.of("BUS", "꼬북"));
     }
 
     @Test
