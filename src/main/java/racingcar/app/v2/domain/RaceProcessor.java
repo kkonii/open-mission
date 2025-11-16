@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import racingcar.app.v2.domain.rule.RandomNumberPicker;
 import racingcar.app.v2.dto.AttributeDto;
+import racingcar.app.v2.dto.FinalResultDto;
 import racingcar.app.v2.dto.RoundResultDto;
 
 public class RaceProcessor {
@@ -42,7 +43,19 @@ public class RaceProcessor {
                 .toList();
     }
 
-    public Map<Integer, List<Vehicle>> statisticsOf(Vehicles vehicles) {
-        return statistics.calculateRanksOf(vehicles);
+    public List<FinalResultDto> statisticsOf(Vehicles vehicles) {
+        Map<Integer, List<Vehicle>> statisticResult = statistics.calculateRanksOf(vehicles);
+
+        return statisticResult.entrySet()
+                .stream()
+                .map(entry -> new FinalResultDto(entry.getKey(), namesOf(entry.getValue())))
+                .toList();
+    }
+
+    private List<String> namesOf(List<Vehicle> values) {
+        return values
+                .stream()
+                .map(Vehicle::getName)
+                .toList();
     }
 }

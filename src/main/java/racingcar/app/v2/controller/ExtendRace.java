@@ -4,6 +4,7 @@ import java.util.List;
 import racingcar.app.v2.domain.RaceProcessor;
 import racingcar.app.v2.domain.Vehicles;
 import racingcar.app.v2.dto.AttributeDto;
+import racingcar.app.v2.dto.FinalResultDto;
 import racingcar.app.v2.dto.RoundResultDto;
 import racingcar.app.v2.util.Parser;
 import racingcar.app.v2.view.InputView;
@@ -31,7 +32,7 @@ public class ExtendRace implements Race {
         int tryCount = RetryHandler.runUntilSuccess(this::inputTryCount);
 
         proceedRace(tryCount, cars);
-        printWinner(cars);
+        printResultOf(cars);
     }
 
     private Vehicles inputVehicles() {
@@ -56,8 +57,8 @@ public class ExtendRace implements Race {
         allResults.forEach(outputView::printResultOf);
     }
 
-    private void printWinner(Vehicles vehicles) {
-        //List<WinnerDto> winners = raceProcessor.sortWinners(vehicles);
-        //outputView.printNamesOf(winners);
+    private void printResultOf(Vehicles vehicles) {
+        List<FinalResultDto> statistics = raceProcessor.statisticsOf(vehicles);
+        outputView.printRankOf(statistics);
     }
 }
