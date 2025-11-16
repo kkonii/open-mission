@@ -19,11 +19,10 @@ public class Statistics {
 
         for (int i = 1; i < sortedCars.size(); i++) {
             Vehicle car = sortedCars.get(i);
-            int distance = car.getDistance();
 
-            if (distance != currentDistance) {
+            if (!car.movedFor(currentDistance)) {
                 rank = i + 1;
-                currentDistance = distance;
+                currentDistance = car.getDistance();
             }
             List<Vehicle> list = statistics.get(rank);
 
