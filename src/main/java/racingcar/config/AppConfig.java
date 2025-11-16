@@ -6,6 +6,7 @@ import racingcar.app.v1.domain.strategy.RandomNumberPicker;
 import racingcar.app.v1.view.InputView;
 import racingcar.app.v1.view.OutputView;
 import racingcar.app.v2.controller.ExtendRace;
+import racingcar.app.v2.domain.Statistics;
 import racingcar.common.Race;
 
 public class AppConfig {
@@ -18,8 +19,9 @@ public class AppConfig {
 
     //신버전
     private static final racingcar.app.v2.domain.rule.RandomNumberPicker RANDOM_NUMBER_PICKER_V2 = new racingcar.app.v2.domain.rule.RandomNumberPicker();
+    private static final Statistics STATISTICS_V2 = new Statistics();
     private static final racingcar.app.v2.domain.RaceProcessor PROCESSOR_V2 = new racingcar.app.v2.domain.RaceProcessor(
-            RANDOM_NUMBER_PICKER_V2);
+            RANDOM_NUMBER_PICKER_V2, STATISTICS_V2);
     private static final racingcar.app.v2.view.InputView INPUT_V2 = new racingcar.app.v2.view.InputView();
     private static final racingcar.app.v2.view.OutputView OUTPUT_V2 = new racingcar.app.v2.view.OutputView();
 
