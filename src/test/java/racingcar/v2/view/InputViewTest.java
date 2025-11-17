@@ -3,7 +3,7 @@ package racingcar.v2.view;
 import java.io.ByteArrayInputStream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import racingcar.app.v2.view.InputView;
+import racingcar.common.ConsoleScanner;
 
 public class InputViewTest {
 
@@ -12,9 +12,8 @@ public class InputViewTest {
         // given
         String input = "BIKE-강냉이,CAR-돌고래";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        InputView inputView = new InputView();
         // when
-        String result = inputView.getNameInputs();
+        String result = ConsoleScanner.readLine();
         // then
         Assertions.assertThat(result).isEqualTo(input);
     }
