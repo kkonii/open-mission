@@ -7,6 +7,8 @@ import racingcar.app.v1.view.InputView;
 import racingcar.app.v1.view.OutputView;
 import racingcar.app.v2.controller.ExtendRace;
 import racingcar.app.v2.domain.Statistics;
+import racingcar.app.v2.system.Language;
+import racingcar.app.v2.view.message.Provider;
 import racingcar.common.Race;
 
 public class AppConfig {
@@ -22,8 +24,6 @@ public class AppConfig {
     private static final Statistics STATISTICS_V2 = new Statistics();
     private static final racingcar.app.v2.domain.RaceProcessor PROCESSOR_V2 = new racingcar.app.v2.domain.RaceProcessor(
             RANDOM_NUMBER_PICKER_V2, STATISTICS_V2);
-    private static final racingcar.app.v2.view.InputView INPUT_V2 = new racingcar.app.v2.view.InputView();
-    private static final racingcar.app.v2.view.OutputView OUTPUT_V2 = new racingcar.app.v2.view.OutputView();
 
     //구버전
     public static Race classicRace() {
@@ -31,7 +31,11 @@ public class AppConfig {
     }
 
     //신버전
-    public static Race extendRace() {
+    public static Race extendRace(Language language) {
+        Provider provider = Provider.fetchBy(language);
+        racingcar.app.v2.view.InputView INPUT_V2 = new racingcar.app.v2.view.InputView(provider);
+        racingcar.app.v2.view.OutputView OUTPUT_V2 = new racingcar.app.v2.view.OutputView(provider);
+
         return new ExtendRace(PROCESSOR_V2, INPUT_V2, OUTPUT_V2);
     }
 }
