@@ -2,9 +2,9 @@ package racingcar.fixture;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
-import racingcar.app.v2.domain.rule.VehicleModel;
-import racingcar.app.v2.system.Language;
-import racingcar.app.v2.view.message.MessageKey;
+import racingcar.domain.rule.VehicleModel;
+import racingcar.system.Language;
+import racingcar.view.message.MessageKey;
 
 public class Provider {
 

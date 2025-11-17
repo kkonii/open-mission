@@ -1,16 +1,16 @@
 package racingcar;
 
-import racingcar.app.v2.system.Language;
-import racingcar.app.v2.util.Parser;
 import racingcar.common.ConsoleScanner;
-import racingcar.common.Race;
 import racingcar.common.RetryHandler;
 import racingcar.config.AppConfig;
+import racingcar.controller.Race;
+import racingcar.system.Language;
+import racingcar.util.Parser;
 
 public class Application {
     public static void main(String[] args) {
         Language language = RetryHandler.runUntilSuccess(Application::chooseLanguage);
-        Race race = AppConfig.extendRace(language);
+        Race race = AppConfig.raceWith(language);
         race.run();
     }
 
@@ -19,7 +19,7 @@ public class Application {
         System.out.println("1. 한국어");
         System.out.println("2. English");
         System.out.println("3. 日本語");
-        
+
         int languageNumber = Parser.toInteger(ConsoleScanner.readLine());
 
         return Language.findBy(languageNumber);
