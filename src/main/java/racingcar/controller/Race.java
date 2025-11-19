@@ -52,8 +52,8 @@ public class Race {
 
     private void proceedRace(int tryCount, Vehicles vehicles) {
         outputView.printHeader();
-        List<List<RoundResultDto>> allResults = raceProcessor.runAllRound(vehicles);
-        allResults.forEach(outputView::printResultOf);
+        List<RoundResultDto> finishedRace = raceProcessor.runAllRound(vehicles);
+        outputView.printResultOf(finishedRace);
     }
 
     private void printResultOf(Vehicles vehicles) {

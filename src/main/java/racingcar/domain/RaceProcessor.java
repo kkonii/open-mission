@@ -1,6 +1,5 @@
 package racingcar.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import racingcar.domain.rule.RandomNumberPicker;
@@ -26,18 +25,11 @@ public class RaceProcessor {
                 .toList());
     }
 
-    public List<List<RoundResultDto>> runAllRound(Vehicles vehicles) {
-        List<List<RoundResultDto>> allRoundResult = new ArrayList<>();
-
+    //자동차 이름 : 달린 거리
+    public List<RoundResultDto> runAllRound(Vehicles vehicles) {
         for (int i = 0; i < ROUNDS_PER_RACE; i++) {
-            allRoundResult.add(runOneRound(vehicles));
+            vehicles.move(randomNumberPicker::pick);
         }
-
-        return allRoundResult;
-    }
-
-    public List<RoundResultDto> runOneRound(Vehicles vehicles) {
-        vehicles.move(randomNumberPicker::pick);
 
         return vehicles.getVehicles()
                 .stream()
