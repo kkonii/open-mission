@@ -29,7 +29,7 @@ public class InputView {
     }
 
     public String getCountInput() {
-        System.out.println(provider.messageOf(MessageKey.COUNT_TO_TRY));
+        System.out.println(provider.messageOf(MessageKey.BETTING_COUNT));
 
         return ConsoleScanner.readLine();
     }

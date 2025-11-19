@@ -28,9 +28,9 @@ public class Race {
         inputView.guideRacingCars();
 
         Vehicles cars = RetryHandler.runUntilSuccess(this::inputVehicles);
-        int tryCount = RetryHandler.runUntilSuccess(this::inputTryCount);
+        int bettingCount = RetryHandler.runUntilSuccess(this::inputBettingCount);
 
-        proceedRace(tryCount, cars);
+        proceedRace(cars);
         printResultOf(cars);
     }
 
@@ -43,14 +43,14 @@ public class Race {
         return raceProcessor.registerCarsFrom(attributes);
     }
 
-    private int inputTryCount() {
+    private int inputBettingCount() {
         String countInput = inputView.getCountInput();
         InputValidator.blankValue(countInput);
 
         return Parser.toInteger(countInput);
     }
 
-    private void proceedRace(int tryCount, Vehicles vehicles) {
+    private void proceedRace(Vehicles vehicles) {
         outputView.printHeader();
         List<RoundResultDto> finishedRace = raceProcessor.runAllRound(vehicles);
         outputView.printResultOf(finishedRace);
