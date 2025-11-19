@@ -10,6 +10,8 @@ import racingcar.dto.RoundResultDto;
 
 public class RaceProcessor {
 
+    private static final int ROUNDS_PER_RACE = 6;
+
     private final RandomNumberPicker randomNumberPicker;
     private final Statistics statistics;
 
@@ -24,10 +26,10 @@ public class RaceProcessor {
                 .toList());
     }
 
-    public List<List<RoundResultDto>> runAllRound(int tryCount, Vehicles vehicles) {
+    public List<List<RoundResultDto>> runAllRound(Vehicles vehicles) {
         List<List<RoundResultDto>> allRoundResult = new ArrayList<>();
 
-        for (int i = 0; i < tryCount; i++) {
+        for (int i = 0; i < ROUNDS_PER_RACE; i++) {
             allRoundResult.add(runOneRound(vehicles));
         }
 
