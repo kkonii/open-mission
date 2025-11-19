@@ -22,7 +22,7 @@ public class Provider {
         return Stream.of(
                 Arguments.of(Language.KOREAN, MessageKey.PARTICIPANTS_HEADER, "경주 차량 목록"),
                 Arguments.of(Language.ENGLISH, MessageKey.PARTICIPANTS_HEADER, "List of Participants"),
-                Arguments.of(Language.JAPANESE, MessageKey.PARTICIPANTS_HEADER, "参加車両リスト")
+                Arguments.of(Language.JAPANESE, MessageKey.PARTICIPANTS_HEADER, "参加車両のリスト")
         );
     }
 }
