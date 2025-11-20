@@ -33,4 +33,10 @@ public class InputView {
 
         return ConsoleScanner.readLine();
     }
+
+    public String getPredictedInput() {
+        System.out.println(provider.messageOf(MessageKey.PREDICTED_WINNER));
+
+        return ConsoleScanner.readLine();
+    }
 }
