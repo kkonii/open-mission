@@ -80,4 +80,25 @@ public class VehicleTest {
         //then
         Assertions.assertEquals(vehicle1.compareTo(vehicle2), 0);
     }
+
+    @Test
+    void 외부에서_받은_거리와_동일하게_이동했는지_판단한다() {
+        //given
+        Vehicle vehicle = Vehicle.createOf(VehicleModel.BIKE.name(), "카미");
+        //when
+        vehicle.move(2);
+        int distance = 1;
+        //then
+        Assertions.assertTrue(vehicle.movedFor(distance));
+    }
+
+    @Test
+    void 이름값의_동등성을_판별한다() {
+        //given
+        Vehicle vehicle = Vehicle.createOf(VehicleModel.TAXI.name(), "캐럿");
+        //when
+        String someName = "캐럿";
+        //then
+        Assertions.assertTrue(vehicle.equals(someName));
+    }
 }

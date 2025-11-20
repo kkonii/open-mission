@@ -9,6 +9,7 @@ public enum RaceError {
 
     MODEL_NOT_EXIST("입력한 차량 기종은 존재하지 않습니다."),
     MODELS_ARE_NOT_UNIQUE("차량은 서로 중복될 수 없습니다."),
+    NOT_PRESENT_NAME("등록되지 않은 자동차 이름입니다."),
 
     BETTING_COUNT_IS_OVER("배팅 횟수는 %d회에서 %d회 내에서만 입력할 수 있습니다.");
 

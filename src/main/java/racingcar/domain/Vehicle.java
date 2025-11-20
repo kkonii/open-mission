@@ -68,6 +68,10 @@ public class Vehicle implements Comparable<Vehicle> {
         return this.distance == distance;
     }
 
+    public boolean equals(String name) {
+        return this.name.equals(name);
+    }
+
     public VehicleModel getModel() {
         return model;
     }

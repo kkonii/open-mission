@@ -4,6 +4,7 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.rule.VehicleModel;
+import racingcar.exception.RaceError;
 
 public class VehiclesTest {
 
@@ -67,5 +68,18 @@ public class VehiclesTest {
         List<Vehicle> winner = vehicles.sortByDistance();
         //then
         org.assertj.core.api.Assertions.assertThat(winner).containsExactly(vehicle1, vehicle3, vehicle2);
+    }
+
+    @Test
+    void 입력받은_예측_우승자의_이름이_존재하지_않을_경우_예외를_반환한다() {
+        //given
+        Vehicle vehicle1 = Vehicle.createOf(VehicleModel.TAXI.name(), "푸딩");
+        Vehicle vehicle2 = Vehicle.createOf(VehicleModel.BUS.name(), "토스트");
+        Vehicles vehicles = Vehicles.ofUnique(List.of(vehicle1, vehicle2));
+        //when
+        String notPresentName = "루피";
+        //then
+        Assertions.assertThrowsExactly(IllegalArgumentException.class,
+                () -> vehicles.validateContainsName(notPresentName), RaceError.NOT_PRESENT_NAME.message());
     }
 }

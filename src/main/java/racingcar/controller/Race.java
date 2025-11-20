@@ -5,6 +5,7 @@ import racingcar.common.InputValidator;
 import racingcar.common.RetryHandler;
 import racingcar.domain.RaceProcessor;
 import racingcar.domain.Vehicles;
+import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.FinalResultDto;
 import racingcar.dto.RoundResultDto;
@@ -48,6 +49,15 @@ public class Race {
         InputValidator.blankValue(countInput);
 
         return Parser.toInteger(countInput);
+    }
+
+    private PredictedWinner inputPredictedWinner(Vehicles vehicles) {
+        String nameInput = inputView.getPredictedInput();
+        InputValidator.blankValue(nameInput);
+
+        vehicles.validateContainsName(nameInput);
+
+        return new PredictedWinner(nameInput);
     }
 
     private void proceedRace(Vehicles vehicles) {

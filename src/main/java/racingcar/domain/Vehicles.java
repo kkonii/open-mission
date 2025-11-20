@@ -45,6 +45,17 @@ public class Vehicles {
         }
     }
 
+    public void validateContainsName(String name) {
+        if (!contains(name)) {
+            throw new IllegalArgumentException(RaceError.NOT_PRESENT_NAME.message());
+        }
+    }
+
+    private boolean contains(String name) {
+        return vehicles.stream()
+                .anyMatch(vehicle -> vehicle.equals(name));
+    }
+
     public void move(IntSupplier picked) {
         vehicles.forEach(vehicle -> {
             int number = picked.getAsInt();
