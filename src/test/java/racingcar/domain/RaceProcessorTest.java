@@ -1,9 +1,8 @@
-package racingcar.service;
+package racingcar.domain;
 
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import racingcar.domain.Statistics;
 import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.dto.RankResultDto;
 

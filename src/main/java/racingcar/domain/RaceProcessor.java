@@ -1,10 +1,7 @@
-package racingcar.service;
+package racingcar.domain;
 
 import java.util.List;
 import java.util.Map;
-import racingcar.domain.Statistics;
-import racingcar.domain.Vehicle;
-import racingcar.domain.Vehicles;
 import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.RaceResultDto;
