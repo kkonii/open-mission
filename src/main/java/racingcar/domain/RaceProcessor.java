@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.dto.AttributeDto;
-import racingcar.dto.RaceResultDto;
-import racingcar.dto.RankResultDto;
 
 public class RaceProcessor {
 
@@ -26,37 +24,19 @@ public class RaceProcessor {
     }
 
     //자동차 이름 : 달린 거리
-    public List<RaceResultDto> runRace(Vehicles vehicles) {
+    public void runRace(Vehicles vehicles) {
         for (int i = 0; i < ROUNDS_PER_RACE; i++) {
             vehicles.move(randomNumberPicker::pick);
         }
-
-        return vehicles.getVehicles()
-                .stream()
-                .map(vehicle -> new RaceResultDto(vehicle.getName(), vehicle.getDistance()))
-                .toList();
     }
 
-    public List<RankResultDto> statisticsOf(Vehicles vehicles) {
-        Map<Integer, List<Vehicle>> statisticResult = statistics.calculateRanksOf(vehicles);
-
-        return statisticResult.entrySet()
-                .stream()
-                .map(entry -> new RankResultDto(entry.getKey(), namesOf(entry.getValue())))
-                .toList();
+    // 순위: 이름 리스트
+    public Map<Integer, List<Vehicle>> statisticsOf(Vehicles vehicles) {
+        return statistics.calculateRanksOf(vehicles);
     }
 
-    private List<String> namesOf(List<Vehicle> values) {
-        return values
-                .stream()
-                .map(Vehicle::getName)
-                .toList();
-    }
-
-    public List<String> findWinners(List<RankResultDto> finalResults) {
-        return finalResults.stream()
-                .filter(result -> result.rank() == 1)
-                .flatMap(result -> result.names().stream())
-                .toList();
+    //순위가 1위인 것만 걸러냄
+    public List<Vehicle> findWinners(Map<Integer, List<Vehicle>> ranks) {
+        return List.copyOf(ranks.getOrDefault(1, List.of()));
     }
 }

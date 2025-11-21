@@ -1,7 +1,9 @@
 package racingcar.service;
 
 import java.util.List;
+import java.util.Map;
 import racingcar.domain.RaceProcessor;
+import racingcar.domain.Vehicle;
 import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.BettingRoundDto;
@@ -20,13 +22,42 @@ public class BettingService {
     }
 
     public List<RaceResultDto> playOneRound(Vehicles vehicles, PredictedWinner predictedWinner) {
-        List<RaceResultDto> finishedRace = raceProcessor.runRace(vehicles);
-        List<RankResultDto> ranksOfRace = raceProcessor.statisticsOf(vehicles);
-        List<String> winners = raceProcessor.findWinners(ranksOfRace);
-        boolean isSuccess = winners.contains(predictedWinner.name());
+        raceProcessor.runRace(vehicles);
+        Map<Integer, List<Vehicle>> ranks = raceProcessor.statisticsOf(vehicles);
+        List<Vehicle> winners = raceProcessor.findWinners(ranks);
+        boolean isSuccess = matchNameOf(predictedWinner, winners);
 
-        roundRepository.save(new BettingRoundDto(predictedWinner.name(), winners, isSuccess));
+        BettingRoundDto bettingRound = new BettingRoundDto(predictedWinner.name(), namesOf(winners), isSuccess);
+        roundRepository.save(bettingRound);
 
-        return finishedRace;
+        return mapToRaceResultDto(vehicles);
     }
+
+    private boolean matchNameOf(PredictedWinner predictedWinner, List<Vehicle> winners) {
+        return winners.stream()
+                .anyMatch(winner -> winner.equals(predictedWinner.name()));
+    }
+
+    public List<RaceResultDto> mapToRaceResultDto(Vehicles vehicles) {
+        return vehicles.getVehicles()
+                .stream()
+                .map(vehicle -> new RaceResultDto(vehicle.getName(), vehicle.getDistance()))
+                .toList();
+    }
+
+    public List<RankResultDto> mapToRankDto(Map<Integer, List<Vehicle>> rankResult) {
+        return rankResult.entrySet()
+                .stream()
+                .map(entry -> new RankResultDto(entry.getKey(), namesOf(entry.getValue())))
+                .toList();
+    }
+
+    private List<String> namesOf(List<Vehicle> values) {
+        return values
+                .stream()
+                .map(Vehicle::getName)
+                .toList();
+    }
+
+
 }
