@@ -6,8 +6,8 @@ import racingcar.common.RetryHandler;
 import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.AttributeDto;
-import racingcar.dto.FinalResultDto;
-import racingcar.dto.RoundResultDto;
+import racingcar.dto.RaceResultDto;
+import racingcar.dto.RankResultDto;
 import racingcar.service.RaceProcessor;
 import racingcar.util.Parser;
 import racingcar.view.InputView;
@@ -62,12 +62,12 @@ public class Race {
 
     private void proceedRace(Vehicles vehicles) {
         outputView.printHeader();
-        List<RoundResultDto> finishedRound = raceProcessor.runAllRound(vehicles);
-        outputView.printResultOf(finishedRound);
+        List<RaceResultDto> finishedRace = raceProcessor.runRace(vehicles);
+        outputView.printResultOf(finishedRace);
     }
 
     private void printResultOf(Vehicles vehicles) {
-        List<FinalResultDto> statistics = raceProcessor.statisticsOf(vehicles);
+        List<RankResultDto> statistics = raceProcessor.statisticsOf(vehicles);
         outputView.printRankOf(statistics);
     }
 }

@@ -7,8 +7,8 @@ import racingcar.domain.Vehicle;
 import racingcar.domain.Vehicles;
 import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.dto.AttributeDto;
-import racingcar.dto.FinalResultDto;
-import racingcar.dto.RoundResultDto;
+import racingcar.dto.RaceResultDto;
+import racingcar.dto.RankResultDto;
 
 public class RaceProcessor {
 
@@ -29,23 +29,23 @@ public class RaceProcessor {
     }
 
     //자동차 이름 : 달린 거리
-    public List<RoundResultDto> runAllRound(Vehicles vehicles) {
+    public List<RaceResultDto> runRace(Vehicles vehicles) {
         for (int i = 0; i < ROUNDS_PER_RACE; i++) {
             vehicles.move(randomNumberPicker::pick);
         }
 
         return vehicles.getVehicles()
                 .stream()
-                .map(vehicle -> new RoundResultDto(vehicle.getName(), vehicle.getDistance()))
+                .map(vehicle -> new RaceResultDto(vehicle.getName(), vehicle.getDistance()))
                 .toList();
     }
 
-    public List<FinalResultDto> statisticsOf(Vehicles vehicles) {
+    public List<RankResultDto> statisticsOf(Vehicles vehicles) {
         Map<Integer, List<Vehicle>> statisticResult = statistics.calculateRanksOf(vehicles);
 
         return statisticResult.entrySet()
                 .stream()
-                .map(entry -> new FinalResultDto(entry.getKey(), namesOf(entry.getValue())))
+                .map(entry -> new RankResultDto(entry.getKey(), namesOf(entry.getValue())))
                 .toList();
     }
 
@@ -56,7 +56,7 @@ public class RaceProcessor {
                 .toList();
     }
 
-    public List<String> findWinners(List<FinalResultDto> finalResults) {
+    public List<String> findWinners(List<RankResultDto> finalResults) {
         return finalResults.stream()
                 .filter(result -> result.rank() == 1)
                 .flatMap(result -> result.names().stream())
