@@ -3,12 +3,12 @@ package racingcar.controller;
 import java.util.List;
 import racingcar.common.InputValidator;
 import racingcar.common.RetryHandler;
-import racingcar.domain.RaceProcessor;
 import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.FinalResultDto;
 import racingcar.dto.RoundResultDto;
+import racingcar.service.RaceProcessor;
 import racingcar.util.Parser;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
@@ -62,8 +62,8 @@ public class Race {
 
     private void proceedRace(Vehicles vehicles) {
         outputView.printHeader();
-        List<RoundResultDto> finishedRace = raceProcessor.runAllRound(vehicles);
-        outputView.printResultOf(finishedRace);
+        List<RoundResultDto> finishedRound = raceProcessor.runAllRound(vehicles);
+        outputView.printResultOf(finishedRound);
     }
 
     private void printResultOf(Vehicles vehicles) {

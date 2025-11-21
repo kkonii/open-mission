@@ -1,9 +1,9 @@
 package racingcar.config;
 
 import racingcar.controller.Race;
-import racingcar.domain.RaceProcessor;
 import racingcar.domain.Statistics;
 import racingcar.domain.rule.RandomNumberPicker;
+import racingcar.service.RaceProcessor;
 import racingcar.system.Language;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;

@@ -1,7 +1,10 @@
-package racingcar.domain;
+package racingcar.service;
 
 import java.util.List;
 import java.util.Map;
+import racingcar.domain.Statistics;
+import racingcar.domain.Vehicle;
+import racingcar.domain.Vehicles;
 import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.FinalResultDto;
@@ -50,6 +53,13 @@ public class RaceProcessor {
         return values
                 .stream()
                 .map(Vehicle::getName)
+                .toList();
+    }
+
+    public List<String> findWinners(List<FinalResultDto> finalResults) {
+        return finalResults.stream()
+                .filter(result -> result.rank() == 1)
+                .flatMap(result -> result.names().stream())
                 .toList();
     }
 }
