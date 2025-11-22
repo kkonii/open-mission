@@ -2,13 +2,13 @@ package racingcar.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import racingcar.dto.BettingRoundDto;
+import racingcar.domain.BettingRound;
 
 public class BettingRoundRepository {
 
-    private final List<BettingRoundDto> rounds = new ArrayList<>();
+    private final List<BettingRound> rounds = new ArrayList<>();
 
-    public void save(BettingRoundDto round) {
+    public void save(BettingRound round) {
         rounds.add(round);
     }
 }

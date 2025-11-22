@@ -2,12 +2,13 @@ package racingcar.service;
 
 import java.util.List;
 import java.util.Map;
+import racingcar.domain.BettingRound;
 import racingcar.domain.RaceProcessor;
 import racingcar.domain.Vehicle;
 import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.AttributeDto;
-import racingcar.dto.BettingRoundDto;
+import racingcar.dto.BettingResultDto;
 import racingcar.dto.RaceResultDto;
 import racingcar.dto.RankResultDto;
 import racingcar.dto.RoundResultDto;
@@ -35,17 +36,14 @@ public class BettingService {
         raceProcessor.runRace(vehicles);
         Map<Integer, List<Vehicle>> ranks = raceProcessor.statisticsOf(vehicles);
         List<Vehicle> winners = raceProcessor.findWinners(ranks);
-        boolean isSuccess = matchNameOf(predictedWinner, winners);
 
-        BettingRoundDto bettingRound = new BettingRoundDto(predictedWinner.name(), namesOf(winners), isSuccess);
+        BettingRound bettingRound = new BettingRound(predictedWinner.name(), namesOf(winners));
         roundRepository.save(bettingRound);
 
-        return new RoundResultDto(mapToRaceResultDto(vehicles), mapToRankDto(ranks), bettingRound);
-    }
+        BettingResultDto bettingResult = new BettingResultDto(bettingRound.predictedName(), bettingRound.winnerNames(),
+                bettingRound.isSuccess());
 
-    private boolean matchNameOf(PredictedWinner predictedWinner, List<Vehicle> winners) {
-        return winners.stream()
-                .anyMatch(winner -> winner.equals(predictedWinner.name()));
+        return new RoundResultDto(mapToRaceResultDto(vehicles), mapToRankDto(ranks), bettingResult);
     }
 
     public List<RaceResultDto> mapToRaceResultDto(Vehicles vehicles) {

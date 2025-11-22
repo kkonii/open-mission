@@ -1,7 +1,7 @@
 package racingcar.view;
 
 import java.util.List;
-import racingcar.dto.BettingRoundDto;
+import racingcar.dto.BettingResultDto;
 import racingcar.dto.RaceResultDto;
 import racingcar.dto.RankResultDto;
 import racingcar.view.message.MessageKey;
@@ -45,7 +45,7 @@ public class OutputView {
         }
     }
 
-    public void printBettingResult(BettingRoundDto bettingRound) {
+    public void printBettingResult(BettingResultDto bettingRound) {
         System.out.println();
         System.out.println(formatOf(MessageKey.WINNER_IS, String.join(JOINING_DELIMITER, bettingRound.winnerNames())));
         if (bettingRound.isSuccess()) {
