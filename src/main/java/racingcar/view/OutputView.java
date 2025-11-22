@@ -46,8 +46,8 @@ public class OutputView {
     }
 
     public void printBettingResult(BettingRoundDto bettingRound) {
+        System.out.println();
         System.out.println(formatOf(MessageKey.WINNER_IS, String.join(JOINING_DELIMITER, bettingRound.winnerNames())));
-        System.out.println(formatOf(MessageKey.PREDICTED_WINNER_IS, bettingRound.predictedName()));
         if (bettingRound.isSuccess()) {
             System.out.println(provider.messageOf(MessageKey.BETTING_SUCCESS));
         }
