@@ -6,7 +6,7 @@ import racingcar.domain.rule.RandomNumberPicker;
 
 public class RaceProcessor {
 
-    private static final int ROUNDS_PER_RACE = 6;
+    private static final int FIXED_ROUNDS = 6;
 
     private final RandomNumberPicker randomNumberPicker;
     private final Statistics statistics;
@@ -18,7 +18,8 @@ public class RaceProcessor {
 
     //자동차 이름 : 달린 거리
     public void runRace(Vehicles vehicles) {
-        for (int i = 0; i < ROUNDS_PER_RACE; i++) {
+        vehicles.resetAll();
+        for (int i = 0; i < FIXED_ROUNDS; i++) {
             vehicles.move(randomNumberPicker::pick);
         }
     }

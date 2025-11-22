@@ -69,6 +69,10 @@ public class Vehicles {
                 .toList();
     }
 
+    public void resetAll() {
+        vehicles.forEach(Vehicle::reset);
+    }
+
     public Set<Vehicle> getVehicles() {
         return vehicles;
     }

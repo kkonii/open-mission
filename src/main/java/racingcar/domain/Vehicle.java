@@ -72,6 +72,10 @@ public class Vehicle implements Comparable<Vehicle> {
         return this.name.equals(name);
     }
 
+    public void reset() {
+        this.distance = 0;
+    }
+
     public VehicleModel getModel() {
         return model;
     }

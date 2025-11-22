@@ -101,4 +101,19 @@ public class VehicleTest {
         //then
         Assertions.assertTrue(vehicle.equals(someName));
     }
+
+    @Test
+    void 전진거리를_초기화한다() {
+        //given
+        Vehicle car = Vehicle.createOf(VehicleModel.BIKE.name(), "우테코");
+        //when
+        car.move(4);
+        //then
+        Assertions.assertEquals(car.getDistance(), 1);
+
+        //when
+        car.reset();
+        //then
+        Assertions.assertEquals(car.getDistance(), 0);
+    }
 }
