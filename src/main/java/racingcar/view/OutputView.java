@@ -50,6 +50,7 @@ public class OutputView {
         System.out.println(formatOf(MessageKey.WINNER_IS, String.join(JOINING_DELIMITER, bettingRound.winnerNames())));
         if (bettingRound.isSuccess()) {
             System.out.println(provider.messageOf(MessageKey.BETTING_SUCCESS));
+            return;
         }
         System.out.println(provider.messageOf(MessageKey.BETTING_FAIL));
     }

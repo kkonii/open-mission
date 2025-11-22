@@ -29,12 +29,14 @@ public class InputView {
     }
 
     public String getCountInput() {
+        System.out.println();
         System.out.println(provider.messageOf(MessageKey.BETTING_COUNT));
 
         return ConsoleScanner.readLine();
     }
 
     public String getPredictedInput() {
+        System.out.println();
         System.out.println(provider.messageOf(MessageKey.PREDICTED_WINNER));
 
         return ConsoleScanner.readLine();
