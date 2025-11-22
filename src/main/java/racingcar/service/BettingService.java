@@ -9,6 +9,7 @@ import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.BettingRoundDto;
 import racingcar.dto.RaceResultDto;
 import racingcar.dto.RankResultDto;
+import racingcar.dto.RoundResultDto;
 import racingcar.repository.BettingRoundRepository;
 
 public class BettingService {
@@ -21,7 +22,7 @@ public class BettingService {
         this.raceProcessor = raceProcessor;
     }
 
-    public List<RaceResultDto> playOneRound(Vehicles vehicles, PredictedWinner predictedWinner) {
+    public RoundResultDto playOneRound(Vehicles vehicles, PredictedWinner predictedWinner) {
         raceProcessor.runRace(vehicles);
         Map<Integer, List<Vehicle>> ranks = raceProcessor.statisticsOf(vehicles);
         List<Vehicle> winners = raceProcessor.findWinners(ranks);
@@ -30,7 +31,7 @@ public class BettingService {
         BettingRoundDto bettingRound = new BettingRoundDto(predictedWinner.name(), namesOf(winners), isSuccess);
         roundRepository.save(bettingRound);
 
-        return mapToRaceResultDto(vehicles);
+        return new RoundResultDto(mapToRaceResultDto(vehicles), mapToRankDto(ranks), bettingRound);
     }
 
     private boolean matchNameOf(PredictedWinner predictedWinner, List<Vehicle> winners) {
@@ -58,6 +59,4 @@ public class BettingService {
                 .map(Vehicle::getName)
                 .toList();
     }
-
-
 }
