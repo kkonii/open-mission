@@ -9,5 +9,10 @@ public enum MessageKey {
 
     ROUND_RESULT_HEADER,        // 횟수별 결과 헤더
     FINAL_RANK_HEADER,          // 최종 순위 발표 헤더
-    RANK_IS                     // %d등 : %s
+    RANK_IS,                    // %d등 : %s
+
+    WINNER_IS,                  // 최종 우승자 : %s
+    PREDICTED_WINNER_IS,        // 예측한 우승자 : %s
+    BETTING_FAIL,               // 예측 배팅 실패
+    BETTING_SUCCESS             // 예측 배팅 성공
 }
