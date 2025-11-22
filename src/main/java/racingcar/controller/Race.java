@@ -6,21 +6,20 @@ import racingcar.common.RetryHandler;
 import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.AttributeDto;
-import racingcar.dto.RaceResultDto;
-import racingcar.dto.RankResultDto;
-import racingcar.service.RaceProcessor;
+import racingcar.dto.RoundResultDto;
+import racingcar.service.BettingService;
 import racingcar.util.Parser;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 public class Race {
 
-    private final RaceProcessor raceProcessor;
+    private final BettingService bettingService;
     private final InputView inputView;
     private final OutputView outputView;
 
-    public Race(RaceProcessor raceProcessor, InputView inputView, OutputView outputView) {
-        this.raceProcessor = raceProcessor;
+    public Race(BettingService bettingService, InputView inputView, OutputView outputView) {
+        this.bettingService = bettingService;
         this.inputView = inputView;
         this.outputView = outputView;
     }
@@ -31,8 +30,8 @@ public class Race {
         Vehicles cars = RetryHandler.runUntilSuccess(this::inputVehicles);
         int bettingCount = RetryHandler.runUntilSuccess(this::inputBettingCount);
 
-        proceedRace(cars);
-        printResultOf(cars);
+        PredictedWinner predictedWinner = inputPredictedWinner(cars);
+        proceedRace(predictedWinner, cars);
     }
 
     private Vehicles inputVehicles() {
@@ -41,7 +40,7 @@ public class Race {
         InputValidator.blankValue(nameInput);
         List<AttributeDto> attributes = Parser.toAttributes(nameInput);
 
-        return raceProcessor.registerCarsFrom(attributes);
+        return bettingService.registerCarsFrom(attributes);
     }
 
     private int inputBettingCount() {
@@ -60,14 +59,16 @@ public class Race {
         return new PredictedWinner(nameInput);
     }
 
-    private void proceedRace(Vehicles vehicles) {
+    private void proceedRace(PredictedWinner predictedWinner, Vehicles vehicles) {
         outputView.printHeader();
-        List<RaceResultDto> finishedRace = raceProcessor.runRace(vehicles);
-        outputView.printResultOf(finishedRace);
+        RoundResultDto finishedRound = bettingService.playOneRound(predictedWinner, vehicles);
+
+        printResultOf(finishedRound);
     }
 
-    private void printResultOf(Vehicles vehicles) {
-        List<RankResultDto> statistics = raceProcessor.statisticsOf(vehicles);
-        outputView.printRankOf(statistics);
+    private void printResultOf(RoundResultDto finishedRound) {
+        outputView.printResultOf(finishedRound.raceResults());
+        outputView.printRankOf(finishedRound.rankResults());
+        outputView.printBettingResult(finishedRound.bettingResult());
     }
 }
