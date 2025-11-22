@@ -4,6 +4,7 @@ import racingcar.controller.Race;
 import racingcar.domain.RaceProcessor;
 import racingcar.domain.Statistics;
 import racingcar.domain.rule.RandomNumberPicker;
+import racingcar.repository.BettingRepository;
 import racingcar.repository.BettingRoundRepository;
 import racingcar.service.BettingService;
 import racingcar.system.Language;
@@ -13,7 +14,7 @@ import racingcar.view.message.Provider;
 
 public class AppConfig {
 
-    private static final BettingRoundRepository ROUND_REPOSITORY = new BettingRoundRepository();
+    private static final BettingRepository ROUND_REPOSITORY = new BettingRoundRepository();
     private static final RandomNumberPicker RANDOM_NUMBER_PICKER = new RandomNumberPicker();
     private static final Statistics STATISTICS = new Statistics();
     private static final RaceProcessor RACE_PROCESSOR = new RaceProcessor(RANDOM_NUMBER_PICKER, STATISTICS);

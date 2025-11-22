@@ -12,14 +12,14 @@ import racingcar.dto.BettingResultDto;
 import racingcar.dto.RaceResultDto;
 import racingcar.dto.RankResultDto;
 import racingcar.dto.RoundResultDto;
-import racingcar.repository.BettingRoundRepository;
+import racingcar.repository.BettingRepository;
 
 public class BettingService {
 
-    private final BettingRoundRepository roundRepository;
+    private final BettingRepository roundRepository;
     private final RaceProcessor raceProcessor;
 
-    public BettingService(BettingRoundRepository roundRepository, RaceProcessor raceProcessor) {
+    public BettingService(BettingRepository roundRepository, RaceProcessor raceProcessor) {
         this.roundRepository = roundRepository;
         this.raceProcessor = raceProcessor;
     }
@@ -65,5 +65,18 @@ public class BettingService {
                 .stream()
                 .map(Vehicle::getName)
                 .toList();
+    }
+
+    public double calculateWinRate() {
+        List<BettingRound> rounds = roundRepository.findAll();
+        if (rounds.isEmpty()) {
+            return 0.0;
+        }
+
+        long hits = rounds.stream()
+                .filter(BettingRound::isSuccess)
+                .count();
+
+        return (double) hits / rounds.size();
     }
 }
