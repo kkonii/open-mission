@@ -6,6 +6,7 @@ import racingcar.domain.RaceProcessor;
 import racingcar.domain.Vehicle;
 import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
+import racingcar.dto.AttributeDto;
 import racingcar.dto.BettingRoundDto;
 import racingcar.dto.RaceResultDto;
 import racingcar.dto.RankResultDto;
@@ -22,7 +23,15 @@ public class BettingService {
         this.raceProcessor = raceProcessor;
     }
 
-    public RoundResultDto playOneRound(Vehicles vehicles, PredictedWinner predictedWinner) {
+    public Vehicles registerCarsFrom(List<AttributeDto> attributes) {
+        List<Vehicle> vehicles = attributes.stream()
+                .map(attr -> Vehicle.createOf(attr.modelName(), attr.riderName()))
+                .toList();
+
+        return Vehicles.ofUnique(vehicles);
+    }
+
+    public RoundResultDto playOneRound(PredictedWinner predictedWinner, Vehicles vehicles) {
         raceProcessor.runRace(vehicles);
         Map<Integer, List<Vehicle>> ranks = raceProcessor.statisticsOf(vehicles);
         List<Vehicle> winners = raceProcessor.findWinners(ranks);

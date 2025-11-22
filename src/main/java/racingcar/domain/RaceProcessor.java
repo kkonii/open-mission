@@ -3,7 +3,6 @@ package racingcar.domain;
 import java.util.List;
 import java.util.Map;
 import racingcar.domain.rule.RandomNumberPicker;
-import racingcar.dto.AttributeDto;
 
 public class RaceProcessor {
 
@@ -15,12 +14,6 @@ public class RaceProcessor {
     public RaceProcessor(RandomNumberPicker randomNumberPicker, Statistics statistics) {
         this.randomNumberPicker = randomNumberPicker;
         this.statistics = statistics;
-    }
-
-    public Vehicles registerCarsFrom(List<AttributeDto> attributes) {
-        return Vehicles.ofUnique(attributes.stream()
-                .map(attribute -> Vehicle.createOf(attribute.modelName(), attribute.riderName()))
-                .toList());
     }
 
     //자동차 이름 : 달린 거리
