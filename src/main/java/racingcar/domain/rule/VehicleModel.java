@@ -8,8 +8,8 @@ import java.util.function.Predicate;
 public enum VehicleModel {
 
     BIKE((num) -> num <= 4, 1),
-    CAR((num) -> num == 3, 1),
-    FERRARI((num) -> num >= 8, 2),
+    CAR((num) -> num == 3, 2),
+    FERRARI((num) -> num >= 8, 1),
     TAXI((num) -> num % 2 == 1, 1),
     BUS((num) -> num % 2 == 0, 1);
 
