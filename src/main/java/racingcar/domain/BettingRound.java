@@ -8,4 +8,11 @@ public record BettingRound(String predictedName, List<String> winnerNames) {
         return winnerNames.stream()
                 .anyMatch(winner -> winner.equals(predictedName));
     }
+
+    public double score() {
+        if (!isSuccess()) {
+            return 0.0;
+        }
+        return 1.0 / winnerNames.size();
+    }
 }

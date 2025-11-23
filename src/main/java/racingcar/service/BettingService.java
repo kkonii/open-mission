@@ -74,10 +74,10 @@ public class BettingService {
             return new WinRateDto(0.0);
         }
 
-        long hits = rounds.stream()
-                .filter(BettingRound::isSuccess)
-                .count();
+        double totalScore = rounds.stream()
+                .mapToDouble(BettingRound::score)
+                .sum();
 
-        return new WinRateDto((double) hits / rounds.size() * 100);
+        return new WinRateDto((totalScore / rounds.size()) * 100);
     }
 }
