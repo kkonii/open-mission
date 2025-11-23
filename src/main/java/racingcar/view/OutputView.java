@@ -22,7 +22,7 @@ public class OutputView {
 
     public void printHeader() {
         System.out.println();
-        System.out.println(provider.messageOf(MessageKey.ROUND_RESULT_HEADER));
+        printWithBanner(provider.messageOf(MessageKey.ROUND_RESULT_HEADER));
     }
 
     //RaceResult
@@ -36,7 +36,7 @@ public class OutputView {
 
     //RankResult
     public void printRankOf(List<RankResultDto> rankResults) {
-        System.out.println(provider.messageOf(MessageKey.FINAL_RANK_HEADER));
+        printWithBanner(provider.messageOf(MessageKey.FINAL_RANK_HEADER));
         for (RankResultDto result : rankResults) {
             String joinedNames = String.join(JOINING_DELIMITER, result.names());
 
@@ -44,10 +44,14 @@ public class OutputView {
             System.out.printf(rankIs, result.rank(), joinedNames);
             System.out.println();
         }
+        System.out.println(Formatter.bannerLine());
+    }
+
+    private void printWithBanner(String message) {
+        System.out.println(Formatter.banner(message));
     }
 
     public void printBettingResult(BettingResultDto bettingRound) {
-        System.out.println();
         System.out.println(formatOf(MessageKey.WINNER_IS, String.join(JOINING_DELIMITER, bettingRound.winnerNames())));
         if (bettingRound.isSuccess()) {
             System.out.println(provider.messageOf(MessageKey.BETTING_SUCCESS));
