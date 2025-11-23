@@ -78,6 +78,6 @@ public class BettingService {
                 .filter(BettingRound::isSuccess)
                 .count();
 
-        return new WinRateDto((double) hits / rounds.size());
+        return new WinRateDto((double) hits / rounds.size() * 100);
     }
 }
