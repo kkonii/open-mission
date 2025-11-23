@@ -12,6 +12,7 @@ import racingcar.dto.BettingResultDto;
 import racingcar.dto.RaceResultDto;
 import racingcar.dto.RankResultDto;
 import racingcar.dto.RoundResultDto;
+import racingcar.dto.WinRateDto;
 import racingcar.repository.BettingRepository;
 
 public class BettingService {
@@ -67,16 +68,16 @@ public class BettingService {
                 .toList();
     }
 
-    public double calculateWinRate() {
+    public WinRateDto calculateWinRate() {
         List<BettingRound> rounds = roundRepository.findAll();
         if (rounds.isEmpty()) {
-            return 0.0;
+            return new WinRateDto(0.0);
         }
 
         long hits = rounds.stream()
                 .filter(BettingRound::isSuccess)
                 .count();
 
-        return (double) hits / rounds.size();
+        return new WinRateDto((double) hits / rounds.size());
     }
 }

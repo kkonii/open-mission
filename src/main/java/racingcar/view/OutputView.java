@@ -4,6 +4,7 @@ import java.util.List;
 import racingcar.dto.BettingResultDto;
 import racingcar.dto.RaceResultDto;
 import racingcar.dto.RankResultDto;
+import racingcar.dto.WinRateDto;
 import racingcar.view.message.MessageKey;
 import racingcar.view.message.Provider;
 
@@ -55,7 +56,11 @@ public class OutputView {
         System.out.println(provider.messageOf(MessageKey.BETTING_FAIL));
     }
 
-    private String formatOf(MessageKey key, String value) {
+    public void printWinRate(WinRateDto winRate) {
+        System.out.println(formatOf(MessageKey.WIN_RATE, winRate.value()));
+    }
+
+    private <T> String formatOf(MessageKey key, T value) {
         return String.format(provider.messageOf(key), value);
     }
 }

@@ -8,6 +8,7 @@ import racingcar.domain.BettingRound;
 import racingcar.domain.RaceProcessor;
 import racingcar.domain.Statistics;
 import racingcar.domain.rule.RandomNumberPicker;
+import racingcar.dto.WinRateDto;
 import racingcar.repository.BettingRepository;
 import racingcar.repository.BettingRoundRepository;
 
@@ -41,10 +42,10 @@ public class BettingServiceTest {
         BettingService service = new BettingService(repository, raceProcessor);
         // when
         double expectedRate = 0.5;
-        double winRate = service.calculateWinRate();
+        WinRateDto winRate = service.calculateWinRate();
 
         // then
-        Assertions.assertThat(winRate).isEqualTo(expectedRate);
+        Assertions.assertThat(winRate.value()).isEqualTo(expectedRate);
     }
 
     @Test
@@ -58,9 +59,9 @@ public class BettingServiceTest {
 
         // when
         double expectedRate = 0.0;
-        double winRate = service.calculateWinRate();
+        WinRateDto winRate = service.calculateWinRate();
 
         // then
-        Assertions.assertThat(winRate).isEqualTo(expectedRate);
+        Assertions.assertThat(winRate.value()).isEqualTo(expectedRate);
     }
 }

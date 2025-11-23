@@ -7,6 +7,7 @@ import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.RoundResultDto;
+import racingcar.dto.WinRateDto;
 import racingcar.service.BettingService;
 import racingcar.util.Parser;
 import racingcar.view.InputView;
@@ -32,6 +33,8 @@ public class Race {
 
         PredictedWinner predictedWinner = inputPredictedWinner(cars);
         proceedRace(predictedWinner, cars);
+
+        printWinRate();
     }
 
     private Vehicles inputVehicles() {
@@ -70,5 +73,10 @@ public class Race {
         outputView.printResultOf(finishedRound.raceResults());
         outputView.printRankOf(finishedRound.rankResults());
         outputView.printBettingResult(finishedRound.bettingResult());
+    }
+
+    private void printWinRate() {
+        WinRateDto winRate = bettingService.calculateWinRate();
+        outputView.printWinRate(winRate);
     }
 }
