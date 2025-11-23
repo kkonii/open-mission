@@ -31,9 +31,10 @@ public class Race {
         Vehicles cars = RetryHandler.runUntilSuccess(this::inputVehicles);
         int bettingCount = RetryHandler.runUntilSuccess(this::inputBettingCount);
 
-        PredictedWinner predictedWinner = inputPredictedWinner(cars);
-        proceedRace(predictedWinner, cars);
-
+        for (int i = 0; i < bettingCount; i++) {
+            PredictedWinner predictedWinner = RetryHandler.runUntilSuccess(() -> inputPredictedWinner(cars));
+            proceedRace(predictedWinner, cars);
+        }
         printWinRate();
     }
 
