@@ -12,9 +12,8 @@ public class OutputView {
 
     private final Provider provider;
 
-    private static final String MOVE_FORWARD = "█";
-    private static final String CURRENT_POSITION = "▮";
-    private static final String ROUND_RESULT_OF = "%s : %s";
+    private static final String ROUND_RESULT_OF = "%-5s  |  %s";
+    private static final String RANK_RESULT_OF = "%-3s  |  %s";
     private static final String JOINING_DELIMITER = ", ";
 
     public OutputView(Provider provider) {
@@ -28,9 +27,9 @@ public class OutputView {
 
     //RaceResult
     public void printResultOf(List<RaceResultDto> raceResults) {
+        System.out.println(Formatter.distanceScale());
         for (RaceResultDto result : raceResults) {
-            System.out.printf(ROUND_RESULT_OF, result.name(), MOVE_FORWARD.repeat(result.distance()));
-            System.out.print(CURRENT_POSITION);
+            System.out.printf(ROUND_RESULT_OF, result.name(), Formatter.distanceBlock(result.distance()));
             System.out.println();
         }
         System.out.println();
@@ -42,8 +41,8 @@ public class OutputView {
         for (RankResultDto result : rankResults) {
             String joinedNames = String.join(JOINING_DELIMITER, result.names());
 
-            String rankIs = provider.messageOf(MessageKey.RANK_IS);
-            System.out.printf(rankIs, result.rank(), joinedNames);
+            String rank = formatOf(MessageKey.RANK_IS, result.rank());
+            System.out.printf(RANK_RESULT_OF, rank, joinedNames);
             System.out.println();
         }
         System.out.println(Formatter.bannerLine());

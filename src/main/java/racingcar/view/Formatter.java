@@ -3,6 +3,11 @@ package racingcar.view;
 public class Formatter {
 
     private static final String BANNER_LINE = "=============================";
+
+    private static final String DISTANCE_SCALE = "           0    5    10   15";
+    private static final String MOVE_FORWARD = "█";
+    private static final String CURRENT_POSITION = "▮";
+
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String WHITE_SPACE = " ";
 
@@ -23,5 +28,17 @@ public class Formatter {
 
     public static String bannerLine() {
         return LINE_SEPARATOR + BANNER_LINE;
+    }
+
+    public static String distanceScale() {
+        return DISTANCE_SCALE;
+    }
+
+    public static String distanceBlock(int distance) {
+        if (distance <= 0) {
+            return CURRENT_POSITION;
+        }
+
+        return MOVE_FORWARD.repeat(distance) + CURRENT_POSITION;
     }
 }
