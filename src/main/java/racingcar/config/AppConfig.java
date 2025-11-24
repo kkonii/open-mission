@@ -2,7 +2,7 @@ package racingcar.config;
 
 import racingcar.controller.Race;
 import racingcar.domain.RaceProcessor;
-import racingcar.domain.Statistics;
+import racingcar.domain.RaceStatistics;
 import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.repository.BettingRepository;
 import racingcar.repository.BettingRoundRepository;
@@ -16,8 +16,8 @@ public class AppConfig {
 
     private static final BettingRepository ROUND_REPOSITORY = new BettingRoundRepository();
     private static final RandomNumberPicker RANDOM_NUMBER_PICKER = new RandomNumberPicker();
-    private static final Statistics STATISTICS = new Statistics();
-    private static final RaceProcessor RACE_PROCESSOR = new RaceProcessor(RANDOM_NUMBER_PICKER, STATISTICS);
+    private static final RaceStatistics RACE_STATISTICS = new RaceStatistics();
+    private static final RaceProcessor RACE_PROCESSOR = new RaceProcessor(RANDOM_NUMBER_PICKER, RACE_STATISTICS);
     private static final BettingService BETTING_SERVICE = new BettingService(ROUND_REPOSITORY, RACE_PROCESSOR);
 
     public static Race raceWith(Language language) {

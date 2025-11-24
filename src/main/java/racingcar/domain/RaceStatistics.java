@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Statistics {
+public class RaceStatistics {
 
     public Map<Integer, List<Vehicle>> calculateRanksOf(Vehicles vehicles) {
         List<Vehicle> sortedCars = vehicles.sortByDistance();

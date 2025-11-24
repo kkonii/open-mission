@@ -9,11 +9,11 @@ public class RaceProcessor {
     private static final int FIXED_ROUNDS = 6;
 
     private final RandomNumberPicker randomNumberPicker;
-    private final Statistics statistics;
+    private final RaceStatistics raceStatistics;
 
-    public RaceProcessor(RandomNumberPicker randomNumberPicker, Statistics statistics) {
+    public RaceProcessor(RandomNumberPicker randomNumberPicker, RaceStatistics raceStatistics) {
         this.randomNumberPicker = randomNumberPicker;
-        this.statistics = statistics;
+        this.raceStatistics = raceStatistics;
     }
 
     //자동차 이름 : 달린 거리
@@ -26,7 +26,7 @@ public class RaceProcessor {
 
     // 순위: 이름 리스트
     public Map<Integer, List<Vehicle>> statisticsOf(Vehicles vehicles) {
-        return statistics.calculateRanksOf(vehicles);
+        return raceStatistics.calculateRanksOf(vehicles);
     }
 
     //순위가 1위인 것만 걸러냄

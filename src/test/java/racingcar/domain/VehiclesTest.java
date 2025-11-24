@@ -3,7 +3,6 @@ package racingcar.domain;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.domain.rule.VehicleModel;
 import racingcar.exception.RaceError;
 
@@ -86,11 +85,6 @@ public class VehiclesTest {
 
     @Test
     void 모든_자동차들의_전진_거리를_리셋한다() {
-        //given
-        RandomNumberPicker randomNumberPicker = new RandomNumberPicker();
-        Statistics statistics = new Statistics();
-        RaceProcessor raceProcessor = new RaceProcessor(randomNumberPicker, statistics);
-
         Vehicle vehicle1 = Vehicle.createOf(VehicleModel.BIKE.name(), "우테코");
         Vehicle vehicle2 = Vehicle.createOf(VehicleModel.CAR.name(), "포비");
         Vehicles vehicles = Vehicles.ofUnique(List.of(vehicle1, vehicle2));

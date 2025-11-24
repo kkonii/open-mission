@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.rule.VehicleModel;
 
-public class StatisticsTest {
+public class RaceStatisticsTest {
 
     @Test
     void 자동차들의_경주_결과의_순위를_계산한다() {
         //given
-        Statistics statistics = new Statistics();
+        RaceStatistics raceStatistics = new RaceStatistics();
 
         Vehicle vehicle1 = Vehicle.createOf(VehicleModel.BUS.name(), "스이카");
         Vehicle vehicle2 = Vehicle.createOf(VehicleModel.TAXI.name(), "이루카");
@@ -29,7 +29,7 @@ public class StatisticsTest {
         // 2번 이동 (조건: 8 이상)
         vehicle4.move(9);
 
-        Map<Integer, List<Vehicle>> result = statistics.calculateRanksOf(vehicles);
+        Map<Integer, List<Vehicle>> result = raceStatistics.calculateRanksOf(vehicles);
 
         //then
         org.assertj.core.api.Assertions.assertThat(result.get(1)).containsExactly(vehicle1, vehicle4);

@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.BettingRound;
 import racingcar.domain.RaceProcessor;
-import racingcar.domain.Statistics;
+import racingcar.domain.RaceStatistics;
 import racingcar.domain.rule.RandomNumberPicker;
 import racingcar.dto.WinRateDto;
 import racingcar.repository.BettingRepository;
@@ -30,9 +30,9 @@ public class BettingServiceTest {
     void 승률을_계산하여_반환한다() {
         // given
         RandomNumberPicker numberPicker = new RandomNumberPicker();
-        Statistics statistics = new Statistics();
+        RaceStatistics raceStatistics = new RaceStatistics();
         BettingRepository repository = new BettingRoundRepository();
-        RaceProcessor raceProcessor = new RaceProcessor(numberPicker, statistics);
+        RaceProcessor raceProcessor = new RaceProcessor(numberPicker, raceStatistics);
 
         //배팅 성공
         repository.save(new BettingRound("조로", List.of("루피", "조로")));
@@ -51,9 +51,9 @@ public class BettingServiceTest {
     @Test
     void 우승자가_없을_경우_0으로_계산_반환한다() {
         RandomNumberPicker numberPicker = new RandomNumberPicker();
-        Statistics statistics = new Statistics();
+        RaceStatistics raceStatistics = new RaceStatistics();
         BettingRepository repository = new EmptyBettingRoundRepository();
-        RaceProcessor raceProcessor = new RaceProcessor(numberPicker, statistics);
+        RaceProcessor raceProcessor = new RaceProcessor(numberPicker, raceStatistics);
 
         BettingService service = new BettingService(repository, raceProcessor);
 

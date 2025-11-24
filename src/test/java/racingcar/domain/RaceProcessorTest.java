@@ -14,8 +14,8 @@ public class RaceProcessorTest {
     void 계산된_등수에서_우승자를_찾아내_반환한다() {
         //given
         RandomNumberPicker randomNumberPicker = new RandomNumberPicker();
-        Statistics statistics = new Statistics();
-        RaceProcessor raceProcessor = new RaceProcessor(randomNumberPicker, statistics);
+        RaceStatistics raceStatistics = new RaceStatistics();
+        RaceProcessor raceProcessor = new RaceProcessor(randomNumberPicker, raceStatistics);
 
         Map<Integer, List<Vehicle>> ranks = new LinkedHashMap<>();
 
