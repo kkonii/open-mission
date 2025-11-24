@@ -8,10 +8,10 @@ import java.util.function.Predicate;
 public enum VehicleModel {
 
     BIKE((num) -> num <= 4, 1),
-    CAR((num) -> num == 3, 2),
-    FERRARI((num) -> num >= 8, 1),
+    CAR((num) -> num == 3, 3),
+    FERRARI((num) -> num >= 7, 1),
     TAXI((num) -> num % 2 == 1, 1),
-    BUS((num) -> num % 2 == 0, 1);
+    BUS((num) -> num % 3 == 0, 1);
 
     private final Predicate<Integer> movablePoint;
     private final int forward;
