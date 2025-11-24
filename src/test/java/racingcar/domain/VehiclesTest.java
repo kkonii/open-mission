@@ -55,15 +55,15 @@ public class VehiclesTest {
         //given
         Vehicle vehicle1 = Vehicle.createOf(VehicleModel.BUS.name(), "스이카");
         Vehicle vehicle2 = Vehicle.createOf(VehicleModel.TAXI.name(), "이루카");
-        Vehicle vehicle3 = Vehicle.createOf(VehicleModel.CAR.name(), "조우");
+        Vehicle vehicle3 = Vehicle.createOf(VehicleModel.BIKE.name(), "조우");
         Vehicles vehicles = Vehicles.ofUnique(List.of(vehicle1, vehicle2, vehicle3));
         //when
-        //2번 이동 (조건: 짝수번호)
-        vehicle1.move(8);
-        vehicle1.move(8);
+        //2번 이동 (조건: 3의 배수)
+        vehicle1.move(6);
+        vehicle1.move(6);
         //0번 이동 (조건: 홀수번호)
         vehicle2.move(8);
-        //1번 이동 (조건: 3)
+        //1번 이동 (조건: 4이하)
         vehicle3.move(3);
         List<Vehicle> winner = vehicles.sortByDistance();
         //then
@@ -95,7 +95,7 @@ public class VehiclesTest {
 
         //then
         Assertions.assertEquals(1, vehicle1.getDistance());
-        Assertions.assertEquals(1, vehicle2.getDistance());
+        Assertions.assertEquals(3, vehicle2.getDistance());
 
         //when
         vehicles.resetAll();

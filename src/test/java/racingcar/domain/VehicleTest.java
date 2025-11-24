@@ -75,7 +75,7 @@ public class VehicleTest {
         Vehicle vehicle1 = Vehicle.createOf(VehicleModel.BUS.name(), "스이카");
         Vehicle vehicle2 = Vehicle.createOf(VehicleModel.TAXI.name(), "이루카");
         //when
-        vehicle1.move(8);
+        vehicle1.move(9);
         vehicle2.move(7);
         //then
         Assertions.assertEquals(vehicle1.compareTo(vehicle2), 0);

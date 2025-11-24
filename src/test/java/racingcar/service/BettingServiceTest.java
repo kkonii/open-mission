@@ -41,7 +41,7 @@ public class BettingServiceTest {
 
         BettingService service = new BettingService(repository, raceProcessor);
         // when
-        double expectedRate = 50.0;
+        double expectedRate = 25.0;
         WinRateDto winRate = service.calculateWinRate();
 
         // then
