@@ -15,5 +15,7 @@ public enum MessageKey {
     PREDICTED_WINNER_IS,        // 예측한 우승자 : %s
     BETTING_FAIL,               // 예측 배팅 실패
     BETTING_SUCCESS,            // 예측 배팅 성공
+
+    WIN_RATE_HEADER,            // 최종 승률 발표 헤더
     WIN_RATE                    // 최종 승률
 }
