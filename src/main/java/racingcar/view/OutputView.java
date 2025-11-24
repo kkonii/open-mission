@@ -20,9 +20,9 @@ public class OutputView {
         this.provider = provider;
     }
 
-    public void printHeader() {
+    public void printHeader(int round) {
         System.out.println();
-        printWithBanner(provider.messageOf(MessageKey.ROUND_RESULT_HEADER));
+        printWithBanner(formatOf(MessageKey.ROUND_RESULT_HEADER, round));
     }
 
     //RaceResult
@@ -36,8 +36,8 @@ public class OutputView {
     }
 
     //RankResult
-    public void printRankOf(List<RankResultDto> rankResults) {
-        printWithBanner(provider.messageOf(MessageKey.FINAL_RANK_HEADER));
+    public void printRankOf(int round, List<RankResultDto> rankResults) {
+        printWithBanner(formatOf(MessageKey.FINAL_RANK_HEADER, round));
         for (RankResultDto result : rankResults) {
             String joinedNames = String.join(JOINING_DELIMITER, result.names());
 

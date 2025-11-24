@@ -31,9 +31,9 @@ public class Race {
         Vehicles cars = RetryHandler.runUntilSuccess(this::inputVehicles);
         int bettingCount = RetryHandler.runUntilSuccess(this::inputBettingCount);
 
-        for (int i = 0; i < bettingCount; i++) {
+        for (int i = 1; i <= bettingCount; i++) {
             PredictedWinner predictedWinner = RetryHandler.runUntilSuccess(() -> inputPredictedWinner(cars));
-            proceedRace(predictedWinner, cars);
+            proceedRace(i, predictedWinner, cars);
         }
         printWinRate();
     }
@@ -63,16 +63,16 @@ public class Race {
         return new PredictedWinner(nameInput);
     }
 
-    private void proceedRace(PredictedWinner predictedWinner, Vehicles vehicles) {
-        outputView.printHeader();
+    private void proceedRace(int round, PredictedWinner predictedWinner, Vehicles vehicles) {
+        outputView.printHeader(round);
         RoundResultDto finishedRound = bettingService.playOneRound(predictedWinner, vehicles);
 
-        printResultOf(finishedRound);
+        printResultOf(round, finishedRound);
     }
 
-    private void printResultOf(RoundResultDto finishedRound) {
+    private void printResultOf(int round, RoundResultDto finishedRound) {
         outputView.printResultOf(finishedRound.raceResults());
-        outputView.printRankOf(finishedRound.rankResults());
+        outputView.printRankOf(round, finishedRound.rankResults());
         outputView.printBettingResult(finishedRound.bettingResult());
     }
 
