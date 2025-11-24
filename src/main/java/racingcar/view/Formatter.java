@@ -2,7 +2,7 @@ package racingcar.view;
 
 public class Formatter {
 
-    private static final String BANNER_LINE = "=============================";
+    private static final String BANNER_LINE = "===============================";
 
     private static final String DISTANCE_SCALE = "           0    5    10   15";
     private static final String MOVE_FORWARD = "█";

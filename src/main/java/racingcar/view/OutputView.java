@@ -52,13 +52,13 @@ public class OutputView {
         System.out.println(Formatter.banner(message));
     }
 
-    public void printBettingResult(BettingResultDto bettingRound) {
+    public void printBettingResult(int round, BettingResultDto bettingRound) {
         System.out.println(formatOf(MessageKey.WINNER_IS, String.join(JOINING_DELIMITER, bettingRound.winnerNames())));
         if (bettingRound.isSuccess()) {
             System.out.println(provider.messageOf(MessageKey.BETTING_SUCCESS));
             return;
         }
-        System.out.println(provider.messageOf(MessageKey.BETTING_FAIL));
+        System.out.println(formatOf(MessageKey.BETTING_FAIL, round));
     }
 
     public void printWinRate(WinRateDto winRate) {

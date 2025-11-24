@@ -15,10 +15,10 @@ public class InputView {
     }
 
     public void guideRacingCars() {
-        System.out.println(provider.messageOf(MessageKey.PARTICIPANTS_HEADER));
+        System.out.println(Formatter.banner(provider.messageOf(MessageKey.PARTICIPANTS_HEADER)));
         System.out.println(VehicleModel.getNames()
                 .stream()
-                .collect(Collectors.joining(", ", "<", ">")));
+                .collect(Collectors.joining(", ", " ", " ")));
         System.out.println();
     }
 

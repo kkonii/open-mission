@@ -73,7 +73,7 @@ public class Race {
     private void printResultOf(int round, RoundResultDto finishedRound) {
         outputView.printResultOf(finishedRound.raceResults());
         outputView.printRankOf(round, finishedRound.rankResults());
-        outputView.printBettingResult(finishedRound.bettingResult());
+        outputView.printBettingResult(round, finishedRound.bettingResult());
     }
 
     private void printWinRate() {
