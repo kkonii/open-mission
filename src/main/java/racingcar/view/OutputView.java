@@ -56,14 +56,13 @@ public class OutputView {
         System.out.println(formatOf(MessageKey.WINNER_IS, String.join(JOINING_DELIMITER, bettingRound.winnerNames())));
         if (bettingRound.isSuccess()) {
             System.out.println(provider.messageOf(MessageKey.BETTING_SUCCESS));
-            System.out.println();
             return;
         }
         System.out.println(provider.messageOf(MessageKey.BETTING_FAIL));
-        System.out.println();
     }
 
     public void printWinRate(WinRateDto winRate) {
+        System.out.println();
         printWithBanner(provider.messageOf(MessageKey.WIN_RATE_HEADER));
         System.out.println(formatOf(MessageKey.WIN_RATE, winRate.value()));
     }
