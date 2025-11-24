@@ -14,8 +14,7 @@ public class RaceStatistics {
         int rank = 1;
         int currentDistance = sortedCars.getFirst().getDistance();
 
-        statistics.put(rank, new ArrayList<>());
-        statistics.get(rank).add(sortedCars.getFirst());
+        statistics.computeIfAbsent(rank, key -> new ArrayList<>()).add(sortedCars.getFirst());
 
         for (int i = 1; i < sortedCars.size(); i++) {
             Vehicle car = sortedCars.get(i);
@@ -24,13 +23,7 @@ public class RaceStatistics {
                 rank = i + 1;
                 currentDistance = car.getDistance();
             }
-            List<Vehicle> list = statistics.get(rank);
-
-            if (list == null) {
-                list = new ArrayList<>();
-                statistics.put(rank, list);
-            }
-            list.add(car);
+            statistics.computeIfAbsent(rank, key -> new ArrayList<>()).add(car);
         }
 
         return statistics;
