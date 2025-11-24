@@ -9,10 +9,9 @@ import racingcar.domain.Vehicles;
 import racingcar.domain.vo.PredictedWinner;
 import racingcar.dto.AttributeDto;
 import racingcar.dto.BettingResultDto;
-import racingcar.dto.RaceResultDto;
-import racingcar.dto.RankResultDto;
 import racingcar.dto.RoundResultDto;
 import racingcar.dto.WinRateDto;
+import racingcar.dto.mapper.Mapper;
 import racingcar.repository.BettingRepository;
 
 public class BettingService {
@@ -38,34 +37,13 @@ public class BettingService {
         Map<Integer, List<Vehicle>> ranks = raceProcessor.statisticsOf(vehicles);
         List<Vehicle> winners = raceProcessor.findWinners(ranks);
 
-        BettingRound bettingRound = new BettingRound(predictedWinner.name(), namesOf(winners));
+        BettingRound bettingRound = new BettingRound(predictedWinner.name(), Mapper.namesOf(winners));
         roundRepository.save(bettingRound);
 
         BettingResultDto bettingResult = new BettingResultDto(bettingRound.predictedName(), bettingRound.winnerNames(),
                 bettingRound.isSuccess());
 
-        return new RoundResultDto(mapToRaceResultDto(vehicles), mapToRankDto(ranks), bettingResult);
-    }
-
-    public List<RaceResultDto> mapToRaceResultDto(Vehicles vehicles) {
-        return vehicles.getVehicles()
-                .stream()
-                .map(vehicle -> new RaceResultDto(vehicle.getName(), vehicle.getDistance()))
-                .toList();
-    }
-
-    public List<RankResultDto> mapToRankDto(Map<Integer, List<Vehicle>> rankResult) {
-        return rankResult.entrySet()
-                .stream()
-                .map(entry -> new RankResultDto(entry.getKey(), namesOf(entry.getValue())))
-                .toList();
-    }
-
-    private List<String> namesOf(List<Vehicle> values) {
-        return values
-                .stream()
-                .map(Vehicle::getName)
-                .toList();
+        return new RoundResultDto(Mapper.toRaceResultDto(vehicles), Mapper.toRankDto(ranks), bettingResult);
     }
 
     public WinRateDto calculateWinRate() {
