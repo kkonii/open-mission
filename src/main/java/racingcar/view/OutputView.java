@@ -12,7 +12,8 @@ public class OutputView {
 
     private final Provider provider;
 
-    private static final String MOVE_FORWARD = "-";
+    private static final String MOVE_FORWARD = "█";
+    private static final String CURRENT_POSITION = "▮";
     private static final String ROUND_RESULT_OF = "%s : %s";
     private static final String JOINING_DELIMITER = ", ";
 
@@ -29,6 +30,7 @@ public class OutputView {
     public void printResultOf(List<RaceResultDto> raceResults) {
         for (RaceResultDto result : raceResults) {
             System.out.printf(ROUND_RESULT_OF, result.name(), MOVE_FORWARD.repeat(result.distance()));
+            System.out.print(CURRENT_POSITION);
             System.out.println();
         }
         System.out.println();
